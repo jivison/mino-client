@@ -1,0 +1,25 @@
+@import "../vars.css"
+    
+.Card
+    display: flex
+    flex-direction: row
+    justify-content: flex
+    align-items: center
+    padding: 1em
+    border-radius: 3rem
+
+    &:hover
+        background: var(--bg-hover)
+        cursor: pointer
+
+    &:active
+        background: var(--bg-active)
+    
+.Card-image
+    margin-right: 1em
+    object-fit: cover
+    width: 3vw
+    height: 3vw
+
+.Card-image.circular
+    border-radius: 50%

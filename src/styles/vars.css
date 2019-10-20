@@ -1,0 +1,5 @@
+:root {
+    --fonts: monospace;
+    --bg-hover: rgb(245, 250, 255);
+    --bg-active: rgb(245, 255, 255);
+}
