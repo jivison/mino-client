@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Modal from "react-modal";
 import Form from "./Form";
 import FormField from "./FormField";
-import FormErrors from "./FormErrors";
 
 Modal.setAppElement("#root");
 
@@ -22,11 +21,11 @@ function EditModal({
             <button className="generic button" onClick={closeModal}>
                 Close
             </button>
-            <FormErrors errors={errors} />
             <Form
                 fields={[...fields, "create_map"]}
                 title={`Edit ${entityName}`}
                 submitHandler={submitHandler}
+                errors={errors}
             >
                 {fields.map(field => {
                     return (
@@ -36,10 +35,11 @@ function EditModal({
                                 field
                                     .split("")
                                     .slice(1)
-                                    .join("")
+                                    .join("").split("_").join(" ")
                             }
                             name={field}
                             defaultValue={entity[field]}
+                            type={field.includes("url") ? "url" : "text"}
                         />
                     );
                 })}

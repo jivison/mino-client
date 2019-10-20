@@ -16,13 +16,14 @@ function ActionButtons({
 }) {
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [mergeModalIsOpen, setMergeModalIsOpen] = useState(false);
-    const [moveModalIsOpen, setMoveModalIsOpen] = useState(false)
+    const [moveModalIsOpen, setMoveModalIsOpen] = useState(false);
     const [errors, setErrors] = useState([]);
 
     const openEditModal = () => {
         setEditModalIsOpen(true);
     };
     const closeEditModal = () => {
+        setErrors([])
         setEditModalIsOpen(false);
     };
 
@@ -52,13 +53,19 @@ function ActionButtons({
             >
                 Delete
             </button>
-            <button onClick={openEditModal} className="delete button">
+            <button onClick={openEditModal} className="edit button">
                 Edit
             </button>
 
             {merge && (
                 <button onClick={openMergeModal} className="merge button">
                     Merge
+                </button>
+            )}
+
+            {move && (
+                <button onClick={openMoveModal} className="move button">
+                    Move
                 </button>
             )}
 
@@ -70,12 +77,6 @@ function ActionButtons({
                     entity={entity}
                     entityName={entityName}
                 />
-            )}
-
-            {move && (
-                <button onClick={openMoveModal} className="move button">
-                    Move
-                </button>
             )}
 
             {move && (
@@ -98,7 +99,7 @@ function ActionButtons({
                 submitHandler={data =>
                     model.update(entity.id, data).then(response => {
                         if (response.errors) {
-                            setErrors(response.errors)
+                            setErrors(response.errors);
                         } else {
                             setFunction(response);
                             closeEditModal();

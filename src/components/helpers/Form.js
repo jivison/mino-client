@@ -1,9 +1,12 @@
 import React from "react";
+import "../../styles/helpers/Form.sass";
+import FormErrors from "./FormErrors";
 
 function Form({
     submitHandler = function() {},
     fields = [],
     title = "",
+    errors = [],
     children
 }) {
     const onSubmit = event => {
@@ -20,7 +23,10 @@ function Form({
     return (
         <form onSubmit={onSubmit} className="Form">
             <h1 className="form-title">{title}</h1>
-            {children}
+            <div className="children">
+                {errors && <FormErrors errors={errors} />}
+                {children}
+            </div>
         </form>
     );
 }

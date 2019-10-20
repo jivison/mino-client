@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/helpers/FormField.sass"
 
 function FormField({
     title,
@@ -9,7 +10,7 @@ function FormField({
     min = null
 }) {
     return submit ? (
-        <input type="submit" className="submit-button" value={title || name} />
+        <input type="submit" className="button submit-button" value={title || name} />
     ) : (
         <div className="FormField">
             {type !== "hidden" && <label>{title}</label>}

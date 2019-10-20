@@ -21,4 +21,7 @@
 
     /* Font sizes */
     --subtitle-size: 1.2rem;
+
+    /* Misc */
+    --outline-colour: var(--link-hover)
 }
