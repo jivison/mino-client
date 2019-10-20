@@ -1,0 +1,21 @@
+@import "./vars.css"
+
+[class$="title"]
+    font-family: var(--title-fonts)
+    font-weight: 300
+
+[class$="subtitle"]
+    color: var(--mute-colour)
+    font-size: var(--subtitle-size)
+
+[class$="link"]
+    &:link, &:visited
+        color: var(--link-colour)
+        text-decoration: none
+
+    &:hover
+        color: var(--link-hover)
+        text-decoration: underline
+    
+    &:active
+        color: var(--link-active)

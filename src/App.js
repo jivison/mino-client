@@ -1,14 +1,18 @@
 import React from 'react';
-import './App.sass';
+import './styles/App.sass';
 import WelcomePage from './pages/WelcomePage';
 import IndexPage from './pages/IndexPage';
+import ArtistShowPage from './pages/ArtistShowPage';
+import AlbumShowPage from './pages/AlbumShowPage';
 
 function App() {
   return (
     <div className="App">
       {
         // <WelcomePage />
-        <IndexPage />
+        // <IndexPage />
+        // <ArtistShowPage />
+        <AlbumShowPage />
       }
     </div>
   );

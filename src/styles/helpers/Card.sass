@@ -1,21 +1,45 @@
 @import "../vars.css"
-    
+
 .Card
+    padding: 1em
+    border-radius: 3rem
+    margin: 1em
+
+.Card-titles
     display: flex
     flex-direction: row
     justify-content: flex
     align-items: center
-    padding: 1em
-    border-radius: 3rem
 
+.Card-children
+    margin-top: 1em
+    margin-left: 2em
+
+.Card-hover
     &:hover
         background: var(--bg-hover)
         cursor: pointer
 
     &:active
         background: var(--bg-active)
-    
+
+.Card-titles
+    *
+        margin: 0
+
+    .Card-title
+        font-family: var(--title-fonts)
+        font-weight: 300
+        font-size: 1.3em
+
+    .Card-subtitle
+        font-family: var(--body-fonts)
+        font-weight: 300
+        color: var(--mute-colour)
+        font-size: calc( var(--subtitle-size) - 0.2rem )
+
 .Card-image
+    margin-left: 0.5em
     margin-right: 1em
     object-fit: cover
     width: 3vw

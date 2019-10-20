@@ -3,30 +3,44 @@ import PropTypes from "prop-types";
 import "../../styles/helpers/Card.sass";
 
 function Card({
-    nohover = true,
+    nohover = false,
     children,
     id,
     image,
     circularImage = true,
-    title = ""
+    title = "",
+    subtitle = "",
+    clickHandler = function() {}
 }) {
     return (
-        <div id={id} className={!nohover ? "Card Card-hover" : "Card"}>
-            <img
-                src={image}
-                alt={id}
-                className={circularImage ? "Card-image circular" : "Card-image"}
-            />
-            <h2 className="Card-title">{title}</h2>
-            {children}
+        <div
+            id={id}
+            className={!nohover ? "Card Card-hover" : "Card"}
+            onClick={clickHandler}
+        >
+            <span className="Card-titles">
+                <img
+                    src={image}
+                    alt={id}
+                    className={
+                        circularImage ? "Card-image circular" : "Card-image"
+                    }
+                />
+                <h2 className="Card-title">{title}</h2>
+                <h2 className="Card-subtitle">{subtitle}</h2>
+            </span>
+            <div className="Card-children">{children}</div>
         </div>
     );
 }
 
 Card.propTypes = {
-    hover: PropTypes.bool,
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
     image: PropTypes.string,
-    circularImage: PropTypes.bool
+    hover: PropTypes.bool,
+    circularImage: PropTypes.bool,
+    clickHandler: PropTypes.func
 };
 
 export default Card;

@@ -1,0 +1,44 @@
+@import "../vars.css"
+    
+.dropdown
+    font-family: var(--body-fonts)
+    width: auto
+
+    .button
+        &:hover
+            color: var(--link-hover)
+            cursor: pointer
+            
+        display: flex
+        align-items: center
+        font-size: 2em
+        max-width
+
+    .caret
+        transition: 0.5s ease
+        transform: rotate(-180deg)
+
+    .dropdown-options
+        border: 2px grey solid
+        position: absolute
+        transition: 0.1s ease
+        padding: 1em
+        background-color: var(--bg-default)
+        
+        *
+            margin-bottom: 0.5em
+
+        .nav-link, .dropdown-item
+            cursor: pointer
+            font-size: 0.8em
+
+            &:link, &:visited
+                color: var(--link-colour)
+                text-decoration: none
+
+            &:hover
+                color: var(--link-hover)
+                text-decoration: underline
+
+            &:last-child
+                margin-bottom: 0

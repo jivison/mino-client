@@ -8,6 +8,7 @@ function CardList({
     letterSeps = false,
     initialLetters = [],
     useIdAsLetter = false,
+    cards=[],
     children
 }) {
     const [letters, setLetters] = useState(initialLetters);
@@ -32,30 +33,31 @@ function CardList({
             <div className="CardList">
                 {letterBar && <LetterBar letters={letters} />}
                 <div className={letterBar ? "CardList-content" : ""}>
+                    {children}
                     {!letterSeps
-                        ? children
-                        : children.map(child => {
-                              if (currentLetter !== child.props.id.charAt(0)) {
-                                  currentLetter = child.props.id.charAt(0);
+                        ? cards
+                        : cards.map(card => {
+                              if (currentLetter !== card.props.id.charAt(0)) {
+                                  currentLetter = card.props.id.charAt(0);
                                   return (
                                       <>
                                           <div
-                                              id={child.props.id
+                                              id={card.props.id
                                                   .charAt(0)
                                                   .toUpperCase()}
                                               className="letter-sep"
                                           >
                                               <h1 className="letter-sep-title">
-                                                  {child.props.id
+                                                  {card.props.id
                                                       .charAt(0)
                                                       .toUpperCase()}
                                               </h1>
                                           </div>
-                                          {child}
+                                          {card}
                                       </>
                                   );
                               } else {
-                                  return child;
+                                  return card;
                               }
                           })}
                 </div>
@@ -67,7 +69,8 @@ function CardList({
 CardList.propTypes = {
     letterSeps: PropTypes.bool,
     letterBar: PropTypes.bool,
-    letters: PropTypes.array
+    letters: PropTypes.array,
+    cards: PropTypes.array
 };
 
 export default CardList;
