@@ -7,6 +7,8 @@ import CardList from "../components/helpers/CardList";
 import Card from "../components/helpers/Card";
 import Track from "../models/Track";
 import DropdownMenu from "../components/helpers/DropdownMenu";
+import FormatDisplay from "../components/helpers/FormatDisplay";
+import NodeMenu from "../components/helpers/NodeMenu";
 
 function IndexPage() {
     const [entities, setEntities] = useState([]);
@@ -28,7 +30,14 @@ function IndexPage() {
                                     entity.image_url || entity.album.image_url
                                 }
                                 circularImage={model.endpoint !== "albums"}
-                                title={entity.title}
+                                title={
+                                    <>
+                                        {entity.title}
+                                        <FormatDisplay
+                                            formats={entity.formats}
+                                        />
+                                    </>
+                                }
                                 subtitle={entity.artist && entity.artist.title}
                                 clickHandler={() => {
                                     window.location.href = `/${model.endpoint}/${entity.id}`;
@@ -46,6 +55,32 @@ function IndexPage() {
                                 .join("")}{" "}
                         <span className="subtitle">{entities.length}</span>
                     </h1>
+                    <NodeMenu initialPrompt="Change View ⭘">
+                        <p
+                            className="option"
+                            onClick={() => {
+                                setModel(Artist);
+                            }}
+                        >
+                            Artists
+                        </p>
+                        <p
+                            className="option"
+                            onClick={() => {
+                                setModel(Album);
+                            }}
+                        >
+                            Albums
+                        </p>
+                        <p
+                            className="option"
+                            onClick={() => {
+                                setModel(Track);
+                            }}
+                        >
+                            Tracks
+                        </p>
+                    </NodeMenu>
                 </CardList>
             </MinoRequest>
         </Page>

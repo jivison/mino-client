@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import EditModal from "./helpers/EditModal";
 import Track from "../models/Track";
 import MoveModal from "./helpers/MoveModal";
+import FormatCardList from "./FormatCardList";
+import TagCardList from "./TagCardList";
 
-function TrackShow({ initialTrack, artist, setTracks, tracks }) {
+function TrackShow({ initialTrack, artist, setTracks, tracks, setFakekey }) {
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [moveModalIsOpen, setMoveModalIsOpen] = useState(false);
     const [errors, setErrors] = useState([]);
@@ -30,9 +32,21 @@ function TrackShow({ initialTrack, artist, setTracks, tracks }) {
                 <span className="TrackShow-subtitle">by {artist.title}</span>
             </h1>
 
+            <FormatCardList
+                formats={track.formats}
+                trackId={track.id}
+                setFakekey={setFakekey}
+            />
+            <TagCardList
+                tags={track.tags}
+                trackId={track.id}
+                setFakekey={setFakekey}
+            />
+
             <button className="edit button" onClick={openEditModal}>
                 Edit
             </button>
+
             <EditModal
                 isOpen={editModalIsOpen}
                 closeModal={closeEditModal}

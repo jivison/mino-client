@@ -39,7 +39,7 @@ function EditModal({
                             }
                             name={field}
                             defaultValue={entity[field]}
-                            type={field.includes("url") ? "url" : "text"}
+                            type={field.includes("_url") ? "url" : "text"}
                         />
                     );
                 })}

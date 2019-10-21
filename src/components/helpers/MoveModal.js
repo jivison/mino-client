@@ -22,8 +22,6 @@ function MoveModal({
         return () => {};
     }, [entity]);
 
-    console.log(moveList);
-
     return (
         <MinoRequest
             modelAction={targetModel.moveable}

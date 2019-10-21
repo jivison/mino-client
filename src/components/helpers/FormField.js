@@ -7,7 +7,8 @@ function FormField({
     defaultValue = "",
     type = "text",
     submit = false,
-    min = null
+    min = null,
+    placeholder = null
 }) {
     return submit ? (
         <input type="submit" className="button submit-button" value={title || name} />
@@ -18,7 +19,7 @@ function FormField({
             {type === "textarea" ? (
                 <textarea
                     name={name}
-                    placeholder={title}
+                    placeholder={placeholder || title}
                     defaultValue={defaultValue}
                 ></textarea>
             ) : type === "hidden" ? (
@@ -32,7 +33,7 @@ function FormField({
                 <input
                     type={type}
                     name={name}
-                    placeholder={title}
+                    placeholder={placeholder || title}
                     defaultValue={defaultValue}
                     min={min}
                 />

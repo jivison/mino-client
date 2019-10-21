@@ -1,49 +1,41 @@
 @import "../vars.css"
     
-.dropdown
-    font-family: var(--body-fonts)
-    width: auto
+.NodeMenu
+    max-width: 9vw
 
-    .button
+    .NodeMenu-prompt
+        user-select: none
+        font-size: 1.5rem
+        font-family: var(--body-fonts)
+        // text-align: center
+        
+
         &:hover
             color: var(--link-hover)
             cursor: pointer
-            
-        display: flex
-        align-items: center
-        font-size: 2em
 
-    .caret
-        transition: 0.5s ease
-        transform: rotate(-180deg)
-
-    .dropdown-options
+    .NodeMenu-options
         border: 2px grey solid
         position: absolute
         transition: 0.1s ease
         padding: 1em
         background-color: var(--bg-default)
-        
-        *
-            margin-bottom: 0.5em
 
-        .nav-link, .dropdown-item
-            cursor: pointer
-            font-size: 0.8em
+        .option
+            font-size: 1.3em
+            font-family: var(--body-fonts)
 
             &:link, &:visited
                 color: var(--link-colour)
                 text-decoration: none
 
             &:hover
+                cursor: pointer
                 color: var(--link-hover)
                 text-decoration: underline
 
             &:last-child
                 margin-bottom: 0
-
-.dropdown.node
-    max-width: 3vw
-    
-    .button
-        font-size: 2em
+            
+.NodeMenu-default
+    max-width: 1.7vw

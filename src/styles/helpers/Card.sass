@@ -9,7 +9,6 @@
     display: flex
     flex-direction: row
     justify-content: flex
-    align-items: center
 
 .Card-children
     margin-top: 1em
@@ -23,14 +22,26 @@
     &:active
         background: var(--bg-active)
 
-.Card-titles
+.Card-content
+    display: flex
+    align-content: center
+
     *
         margin: 0
 
+    .Card-titles
+        display: flex
+        flex-direction: column
+        justify-content: center
+
     .Card-title
+        display: flex
         font-family: var(--title-fonts)
         font-weight: 300
         font-size: 1.3em
+
+        .FormatDisplay
+            margin-left: 0.3em
 
     .Card-subtitle
         font-family: var(--body-fonts)

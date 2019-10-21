@@ -14,3 +14,5 @@ a {
 *:focus {
     outline-color: var(--outline-colour);
 }
+
+body { padding: 0; margin: 0; }

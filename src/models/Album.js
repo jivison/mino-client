@@ -14,6 +14,13 @@ const Album = {
         return query(`albums/${id}`, "delete");
     },
 
+    create(artist_id, params) {
+        return query(`albums`, "post", {
+            artist_id: artist_id,
+            ...params
+        })
+    },
+
     update(id, params) {
         return query(`albums/${id}`, "patch", params);
     },

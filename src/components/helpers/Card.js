@@ -6,28 +6,33 @@ function Card({
     nohover = false,
     children,
     id,
-    image,
+    image = "",
     circularImage = true,
     title = "",
     subtitle = "",
-    clickHandler = function() {}
+    clickHandler = function() {},
+    className=""
 }) {
     return (
         <div
             id={id}
-            className={!nohover ? "Card Card-hover" : "Card"}
+            className={(!nohover ? "Card Card-hover" : "Card") + " " + className}
             onClick={clickHandler}
         >
-            <span className="Card-titles">
-                <img
-                    src={image}
-                    alt={id}
-                    className={
-                        circularImage ? "Card-image circular" : "Card-image"
-                    }
-                />
-                <h2 className="Card-title">{title}</h2>
-                <h2 className="Card-subtitle">{subtitle}</h2>
+            <span className="Card-content">
+                {image && (
+                    <img
+                        src={image}
+                        alt={id}
+                        className={
+                            circularImage ? "Card-image circular" : "Card-image"
+                        }
+                    />
+                )}
+                <div className="Card-titles">
+                    <h2 className="Card-title">{title}</h2>
+                    {subtitle && <h2 className="Card-subtitle">{subtitle}</h2>}
+                </div>
             </span>
             <div className="Card-children">{children}</div>
         </div>

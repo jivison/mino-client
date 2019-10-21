@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Modal from "react-modal";
 import TrackShow from "../TrackShow";
+import FormatDisplay from "./FormatDisplay";
 
 function TrackList({
     tracks,
     editable = false,
     artist = {},
-    setTracks = () => {}
+    setTracks = () => {},
+    setFakekey = () => {}
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -26,10 +28,17 @@ function TrackList({
                     <p>
                         <span className="subtitle">{index + 1}</span>{" "}
                         {track.title}
+                        {!editable && <FormatDisplay formats={track.formats} />}
                         {editable && (
-                            <button onClick={openModal} className="no-button">
-                                Details
-                            </button>
+                            <>
+                                <FormatDisplay formats={track.formats} />
+                                <button
+                                    onClick={openModal}
+                                    className="no-button"
+                                >
+                                    Details
+                                </button>
+                            </>
                         )}
                         {editable && (
                             <Modal
@@ -47,6 +56,7 @@ function TrackList({
                                     artist={artist}
                                     setTracks={setTracks}
                                     tracks={tracks}
+                                    setFakekey={setFakekey}
                                 />
                             </Modal>
                         )}

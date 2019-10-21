@@ -7,17 +7,18 @@ function Form({
     fields = [],
     title = "",
     errors = [],
+    reset = false,
     children
 }) {
     const onSubmit = event => {
         event.preventDefault();
-
         let fd = new FormData(event.target);
         let data = {};
         for (let field of fields) {
             data[field] = fd.get(field);
         }
         submitHandler(data);
+        reset && event.target.reset();
     };
 
     return (
