@@ -4,6 +4,8 @@ import WelcomePage from "./pages/WelcomePage";
 import IndexPage from "./pages/IndexPage";
 import ArtistShowPage from "./pages/ArtistShowPage";
 import AlbumShowPage from "./pages/AlbumShowPage";
+import ExportPage from "./pages/ExportPage";
+import ExternalPlaylistPage from "./pages/ExternalPlaylistPage";
 
 function App() {
     return (
@@ -16,7 +18,9 @@ function App() {
                 // <WelcomePage />
                 // <IndexPage />
                 // <ArtistShowPage />
-                <AlbumShowPage />
+                // <AlbumShowPage />
+                // <ExportPage />
+                <ExternalPlaylistPage />
             }
         </div>
     );

@@ -40,6 +40,10 @@ const Background = {
 
     find_tags_for_artists_tracks(id) {
         return query("$/find_tags_for_artists_tracks", "post", { id: id });
+    },
+
+    clean_collection() {
+        return query("$/clean_collection", "post", {})
     }
 };
 

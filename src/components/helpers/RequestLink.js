@@ -10,11 +10,12 @@ function RequestLink({
     setLoading = () => {},
     setFakekey = () => {},
     onClickSetProps,
+    className = "",
     children
 }) {
     return (
         <p
-            className={isOption ? "option" : ""}
+            className={(isOption ? "option" : "") + className}
             onClick={() => {
                 if (onClickSetProps) {
                     modelProps = onClickSetProps();

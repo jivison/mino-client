@@ -12,6 +12,10 @@ const Artist = {
         return query(`artists/${id}`)
     },
 
+    create(params) {
+        return query("artists", "post", params)
+    },
+
     delete(id) {
         return query(`artists/${id}`, "delete")
     },

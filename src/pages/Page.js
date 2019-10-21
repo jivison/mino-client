@@ -9,7 +9,7 @@ function Page({
     isLoading = false,
     loadingMessage = "Loading..."
 }) {
-    document.title = "Mino | " + title;
+    document.title = "Mino" + (title ? " | " + title : "");
 
     return (
         <div className="Page">
