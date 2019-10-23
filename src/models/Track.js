@@ -7,6 +7,10 @@ const Track = {
         return query("tracks")
     },
 
+    create(params) {
+        return query("tracks", "post", params)
+    },
+
     update(id, params) {
         return query(`tracks/${id}`, "patch", params)
     },

@@ -10,8 +10,10 @@ import post from "../api/post";
 import Background from "../models/Background";
 import RequestLink from "../components/helpers/RequestLink";
 import FormatDisplay from "../components/helpers/FormatDisplay";
+import Track from "../models/Track";
+import qs from "querystring";
 
-function AlbumShowPage() {
+function AlbumShowPage({ match, history, location }) {
     const [album, setAlbum] = useState({});
     const [tracks, setTracks] = useState([]);
     const [fakekey, setFakekey] = useState(Math.random());
@@ -19,15 +21,26 @@ function AlbumShowPage() {
     const [loading, setLoading] = useState(false);
     const [loadingMessage, setLoadingMessage] = useState("Loading...");
 
+    let additionId = parseInt(
+        new URLSearchParams(location.search).get("addition")
+    );
+
+    console.log(additionId);
     useEffect(() => {
-        setTracks(album.tracks);
+        console.log(album.tracks);
+        if (additionId && album.tracks) {
+            setTracks(
+                album.tracks.filter(track => {
+                    return track.addition_ids.includes(additionId);
+                })
+            );
+        } else {
+            setTracks(album.tracks);
+        }
         return () => {};
     }, [album]);
 
-    useEffect(() => {
-        console.log("Key changed");
-        return () => {};
-    }, [fakekey]);
+    const albumId = match.params.id;
 
     return (
         <Page
@@ -38,22 +51,87 @@ function AlbumShowPage() {
         >
             <MinoRequest
                 modelAction={Album.one}
-                modelProps={[297]}
+                modelProps={[albumId, additionId]}
                 setFunction={setAlbum}
                 fakekey={fakekey}
             >
+                {additionId === NaN && (
+                    <p className="AlbumShowPage-addition-description">
+                        You are viewing only the tracks that belong to the
+                        addition{" "}
+                        <a
+                            href="#"
+                            onClick={() => {
+                                history.push(`/additions/${additionId}`);
+                            }}
+                        >
+                            {additionId}
+                        </a>
+                        <br />
+                        <a
+                            href="#"
+                            onClick={() => {
+                                history.push(`/collection/albums/${album.id}`);
+                            }}
+                        >
+                            Click here
+                        </a>{" "}
+                        to view the original album.
+                    </p>
+                )}
                 <Image src={album.image_url} width="10vw" square />
-                <h1 className="Album-title">{album.title}</h1>
+                <h1
+                    className="as-link Album-title"
+                    onClick={() => {
+                        history.push(`/maps/album/${album.id}`);
+                    }}
+                >
+                    {album.title}
+                </h1>
                 <h2 className="Album-subtitle">
                     <a
+                        onClick={e => {
+                            e.preventDefault();
+                            history.push(
+                                `/collection/artists/${album.artist &&
+                                    album.artist.id}`
+                            );
+                        }}
                         className="Album-artist-link"
-                        href={`/artists/${album.artist && album.artist.id}`}
+                        href={`/collection/artists/${album.artist &&
+                            album.artist.id}`}
                     >
                         {album.artist && album.artist.title}
                     </a>
                 </h2>
                 <FormatDisplay formats={album.formats} />
                 <NodeMenu>
+                    <RequestLink
+                        loadingMessage="Creating track..."
+                        setLoadingMessage={setLoadingMessage}
+                        modelAction={Track.create}
+                        setLoading={setLoading}
+                        setFakekey={setFakekey}
+                        onClickSetProps={() => {
+                            let promptAnswer = prompt(
+                                "What track would you like to add?"
+                            );
+
+                            if (promptAnswer) {
+                                return [
+                                    {
+                                        album_id: album.id,
+                                        artist_id: album.artist.id,
+                                        title: promptAnswer
+                                    }
+                                ];
+                            } else {
+                                return false;
+                            }
+                        }}
+                    >
+                        Add Track
+                    </RequestLink>
                     <RequestLink
                         loadingMessage="Getting album art..."
                         setLoadingMessage={setLoadingMessage}
@@ -110,6 +188,7 @@ function AlbumShowPage() {
                     entity={album}
                     entityName="Album"
                     editFields={["title", "image_url"]}
+                    history={history}
                     merge
                     move
                 />

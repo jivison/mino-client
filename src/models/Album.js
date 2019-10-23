@@ -18,7 +18,7 @@ const Album = {
         return query(`albums`, "post", {
             artist_id: artist_id,
             ...params
-        })
+        });
     },
 
     update(id, params) {
@@ -34,11 +34,11 @@ const Album = {
     },
 
     moveable(id) {
-        return query(`albums/${id}/moveable`)
+        return query(`albums/${id}/moveable`);
     },
 
     move(id, params) {
-        return query(`albums/${id}/move`, "post", params)
+        return query(`albums/${id}/move`, "post", params);
     }
 };
 

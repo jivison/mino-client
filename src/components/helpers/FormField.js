@@ -4,16 +4,18 @@ import "../../styles/helpers/FormField.sass"
 function FormField({
     title,
     name,
+    id,
     defaultValue = "",
     type = "text",
     submit = false,
     min = null,
-    placeholder = null
+    placeholder = null,
+    changeHandler = () => {}
 }) {
     return submit ? (
         <input type="submit" className="button submit-button" value={title || name} />
     ) : (
-        <div className="FormField">
+        <div className="FormField" onChange={changeHandler} id={id || `FormField-${name}`}>
             {type !== "hidden" && <label>{title}</label>}
 
             {type === "textarea" ? (

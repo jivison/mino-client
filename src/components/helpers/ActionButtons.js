@@ -12,7 +12,8 @@ function ActionButtons({
     editFields = [],
     entityName = "",
     entity = {},
-    setFunction = () => {}
+    setFunction = () => {},
+    history
 }) {
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [mergeModalIsOpen, setMergeModalIsOpen] = useState(false);
@@ -46,7 +47,7 @@ function ActionButtons({
             <button
                 onClick={() => {
                     model.delete(entity.id).then(response => {
-                        window.location.href = "/";
+                        history.push("/collection");
                     });
                 }}
                 className="delete button"

@@ -12,7 +12,7 @@ import RequestLink from "../components/helpers/RequestLink";
 import Background from "../models/Background";
 import spotifyClientId from "../api/spotify.private";
 
-function IndexPage() {
+function IndexPage({ history }) {
     const [entities, setEntities] = useState([]);
     const [model, setModel] = useState(Artist);
     const [loading, setLoading] = useState(false);
@@ -59,7 +59,17 @@ function IndexPage() {
                                 }
                                 subtitle={entity.artist && entity.artist.title}
                                 clickHandler={() => {
-                                    window.location.href = `/${model.endpoint}/${entity.id}`;
+                                    let endpoint =
+                                        model.endpoint === "tracks"
+                                            ? "albums"
+                                            : model.endpoint;
+                                    let entityId =
+                                        model.endpoint === "tracks"
+                                            ? entity.album.id
+                                            : entity.id;
+                                    history.push(
+                                        `/collection/${endpoint}/${entityId}`
+                                    );
                                 }}
                             ></Card>
                         );
@@ -141,7 +151,7 @@ function IndexPage() {
                         </RequestLink>
                         <p
                             onClick={() => {
-                                window.location.href = "/export";
+                                history.push("/export");
                             }}
                             className="option"
                         >

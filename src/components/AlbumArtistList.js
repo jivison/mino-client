@@ -4,7 +4,7 @@ import Image from "./helpers/Image";
 import TrackList from "./helpers/TrackList";
 import Card from "./helpers/Card";
 
-function AlbumArtistList({ albums }) {
+function AlbumArtistList({ albums, history }) {
     return (
         <div className="AlbumArtistList">
             {albums.map(album => {
@@ -15,7 +15,7 @@ function AlbumArtistList({ albums }) {
                         circularImage={false}
                         title={album.title}
                         clickHandler={() => {
-                            window.location.href = `/albums/${album.id}`;
+                            history.push(`/collection/albums/${album.id}`);
                         }}
                     >
                         <TrackList tracks={album.tracks} />

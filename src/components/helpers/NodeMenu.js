@@ -23,9 +23,9 @@ function NodeMenu({ children, initialPrompt = null }) {
                 (prompt !== initialPrompt ? " NodeMenu-default" : "")
             }
         >
-            <p className="NodeMenu-prompt" onClick={showDropdownMenu}>
+            <span className="NodeMenu-prompt" onClick={showDropdownMenu}>
                 {prompt}
-            </p>
+            </span>
             {displayMenu && (
                 <ul
                     className="NodeMenu-options"

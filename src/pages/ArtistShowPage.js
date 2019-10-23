@@ -11,11 +11,13 @@ import Background from "../models/Background";
 import Album from "../models/Album";
 import FormatDisplay from "../components/helpers/FormatDisplay";
 
-function ArtistShowPage() {
+function ArtistShowPage({ match, history }) {
     const [artist, setArtist] = useState({});
     const [loading, setLoading] = useState(false);
     const [loadingMessage, setLoadingMessage] = useState("Loading...");
     const [fakekey, setFakekey] = useState(Math.random());
+
+    const artistId = match.params.id;
 
     return (
         <Page
@@ -26,12 +28,14 @@ function ArtistShowPage() {
         >
             <MinoRequest
                 modelAction={Artist.one}
-                modelProps={[243]}
+                modelProps={[artistId]}
                 setFunction={setArtist}
                 fakekey={fakekey}
             >
                 <Image src={artist.image_url} width="10vw" circle square />
-                <h1 className="Artist-title">{artist.title}</h1>
+                <h1 className="as-link Artist-title" onClick={() => {
+                history.push(`/maps/artist/${artist.id}`)
+                }}>{artist.title}</h1>
                 <FormatDisplay formats={artist.formats} />
                 <NodeMenu>
                     <RequestLink
@@ -76,7 +80,10 @@ function ArtistShowPage() {
                             );
 
                             if (promptAnswer) {
-                                return [artist.id, promptAnswer.split(/ *, */g)];
+                                return [
+                                    artist.id,
+                                    promptAnswer.split(/ *, */g)
+                                ];
                             } else {
                                 return false;
                             }
@@ -95,13 +102,14 @@ function ArtistShowPage() {
                         Find Tags For Each Track
                     </RequestLink>
                 </NodeMenu>
-                <AlbumArtistList albums={artist.albums} />
+                <AlbumArtistList albums={artist.albums} history={history} />
                 <ActionButtons
                     model={Artist}
                     setFunction={setArtist}
                     entity={artist}
                     entityName="Artist"
                     editFields={["title", "image_url"]}
+                    history={history}
                     merge
                 />
             </MinoRequest>

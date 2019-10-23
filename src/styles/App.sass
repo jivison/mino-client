@@ -16,12 +16,13 @@
     font-family: var(--body-fonts)
     list-style-type: none
 
-[class$="link"]
+[class$="link"], .as-link
     &:link, &:visited
         color: var(--link-colour)
         text-decoration: none
 
     &:hover
+        cursor: pointer
         color: var(--link-hover)
         text-decoration: underline
     
