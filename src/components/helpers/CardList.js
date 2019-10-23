@@ -24,9 +24,11 @@ function CardList({
             newLetters = [...new Set(newLetters)];
             newLetters.sort();
             setLetters(newLetters);
+        } else {
+            setLetters(initialLetters)
         }
         return () => {};
-    }, []);
+    }, [cards]);
 
     return (
         <>

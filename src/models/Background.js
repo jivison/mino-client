@@ -44,6 +44,14 @@ const Background = {
 
     clean_collection() {
         return query("$/clean_collection", "post", {})
+    },
+    
+    change_session(params) {
+        return query("$/change_session", "post", params)
+    },
+
+    get_session(session_key) {
+        return query(`$/get_session?session_key=${session_key}`)
     }
 };
 
