@@ -3,6 +3,7 @@ import Page from "./Page";
 import Form from "../components/helpers/Form";
 import FormField from "../components/helpers/FormField";
 import Addition from "../models/Addition";
+import "../styles/pages/SeedPage.sass"
 
 const renderFields = {
     none: {
@@ -124,8 +125,6 @@ function SeedPage({ history }) {
     };
 
     return (
-        // Format
-        // Options
         <Page
             title="Seed"
             loadingMessage={loadingMessage}
@@ -138,7 +137,7 @@ function SeedPage({ history }) {
                     fields={[...fields, "format"]}
                     submitHandler={submitHandler}
                 >
-                    <select onChange={changeForm} name="format">
+                    <select onChange={changeForm} name="format" className="SeedPage-select">
                         {Object.keys(renderFields).map(field => {
                             return (
                                 <option value={field}>

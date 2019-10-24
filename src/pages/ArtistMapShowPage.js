@@ -4,6 +4,7 @@ import ArtistMap from "../models/ArtistMap";
 import MinoRequest from "../api/MinoRequest";
 import Artist from "../models/Artist";
 import Image from "../components/helpers/Image";
+import "../styles/pages/MapShowPage.sass"
 
 function ArtistMapShowPage({ history, match }) {
     const [artistMaps, setArtistMaps] = useState([]);

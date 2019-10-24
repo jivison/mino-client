@@ -11,6 +11,7 @@ import AlbumMapShowPage from "./AlbumMapShowPage";
 import SeedPage from "./SeedPage";
 import AdditionsPage from "./AdditionsPage";
 import AdditionShowPage from "./AdditionShowPage";
+import InsightsPage from "./InsightsPage";
 
 export {
     WelcomePage,
@@ -25,5 +26,6 @@ export {
     ArtistMapShowPage,
     SeedPage,
     AdditionsPage,
-    AdditionShowPage
+    AdditionShowPage,
+    InsightsPage
 };

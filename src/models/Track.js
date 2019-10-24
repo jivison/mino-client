@@ -21,6 +21,10 @@ const Track = {
 
     move(id, params) {
         return query(`tracks/${id}/move`, "post", params)
+    },
+
+    destroy(id) {
+        return query(`tracks/${id}`, "delete")
     }
 }
 

@@ -1,12 +1,32 @@
+@import "../vars.css"
+    
 .Navbar
     display: flex
-    justify-content: space-around
+    justify-content: space-between
     align-items: center
+    padding: 0em 1em
+    background: var(--bg-hover-mute)
+    margin-bottom: 0.5em
+
+    a
+        font-family: var(--title-fonts)
+        font-size: 1.4em
+
+        &:link, &:visited
+            color: var(--link-colour)
+            text-decoration: none
+
+        &:hover
+            cursor: pointer
+            color: var(--link-hover)
+
+        &:active
+            color: var(--link-active)
+            
 
     .NodeMenu
         .NodeMenu-options
             top: 2vw
-
 
     .logo-container
         width: 3vw

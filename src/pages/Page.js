@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import LoadingOverlay from "react-loading-overlay";
+import "../styles/pages/Page.sass"
 
 function Page({
     title,

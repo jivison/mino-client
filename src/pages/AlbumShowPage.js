@@ -6,12 +6,12 @@ import Image from "../components/helpers/Image";
 import ActionButtons from "../components/helpers/ActionButtons";
 import TrackList from "../components/helpers/TrackList";
 import NodeMenu from "../components/helpers/NodeMenu";
-import post from "../api/post";
 import Background from "../models/Background";
 import RequestLink from "../components/helpers/RequestLink";
 import FormatDisplay from "../components/helpers/FormatDisplay";
 import Track from "../models/Track";
-import qs from "querystring";
+import "../styles/pages/AlbumShowPage.sass";
+import Grade from "grade-js";
 
 function AlbumShowPage({ match, history, location }) {
     const [album, setAlbum] = useState({});
@@ -79,100 +79,139 @@ function AlbumShowPage({ match, history, location }) {
                         to view the original album.
                     </p>
                 )}
-                <Image src={album.image_url} width="10vw" square />
-                <h1
-                    className="as-link Album-title"
-                    onClick={() => {
-                        history.push(`/maps/album/${album.id}`);
-                    }}
-                >
-                    {album.title}
-                </h1>
-                <h2 className="Album-subtitle">
-                    <a
-                        onClick={e => {
-                            e.preventDefault();
-                            history.push(
-                                `/collection/artists/${album.artist &&
-                                    album.artist.id}`
+                <div className="AlbumShowPage-header">
+                    <img
+                        id="album-image"
+                        crossOrigin="anonymous"
+                        className="Image-square Image"
+                        style={{width:"10vw",
+                        height:"10vw"}}
+                        src={album.image_url}
+                        onLoad={() => {
+                            Grade(
+                                document.querySelectorAll("html"),
+                                "#album-image"
                             );
                         }}
-                        className="Album-artist-link"
-                        href={`/collection/artists/${album.artist &&
-                            album.artist.id}`}
-                    >
-                        {album.artist && album.artist.title}
-                    </a>
-                </h2>
-                <FormatDisplay formats={album.formats} />
-                <NodeMenu>
-                    <RequestLink
-                        loadingMessage="Creating track..."
-                        setLoadingMessage={setLoadingMessage}
-                        modelAction={Track.create}
-                        setLoading={setLoading}
-                        setFakekey={setFakekey}
-                        onClickSetProps={() => {
-                            let promptAnswer = prompt(
-                                "What track would you like to add?"
-                            );
+                    ></img>
+                    {
+                        // <Image
+                        //             src={album.image_url}
+                        //             width="10vw"
+                        //             id="album-image"
+                        //             square
+                        //             onLoad={() => {
+                        //                 Grade(
+                        //                     document.querySelectorAll("body"),
+                        //                     "#album-image"
+                        //                 );
+                        //             }}
+                        //         />
+                    }
+                    <div className="AlbumShowPage-titles">
+                        <div className="AlbumShowPage-title-container">
+                            <h1
+                                className="as-link Album-title"
+                                onClick={() => {
+                                    history.push(`/maps/album/${album.id}`);
+                                }}
+                            >
+                                {album.title}
+                            </h1>
+                            <NodeMenu>
+                                <RequestLink
+                                    loadingMessage="Creating track..."
+                                    setLoadingMessage={setLoadingMessage}
+                                    modelAction={Track.create}
+                                    setLoading={setLoading}
+                                    setFakekey={setFakekey}
+                                    onClickSetProps={() => {
+                                        let promptAnswer = prompt(
+                                            "What track would you like to add?"
+                                        );
 
-                            if (promptAnswer) {
-                                return [
-                                    {
-                                        album_id: album.id,
-                                        artist_id: album.artist.id,
-                                        title: promptAnswer
+                                        if (promptAnswer) {
+                                            return [
+                                                {
+                                                    album_id: album.id,
+                                                    artist_id: album.artist.id,
+                                                    title: promptAnswer
+                                                }
+                                            ];
+                                        } else {
+                                            return false;
+                                        }
+                                    }}
+                                >
+                                    Add Track
+                                </RequestLink>
+                                <RequestLink
+                                    loadingMessage="Getting album art..."
+                                    setLoadingMessage={setLoadingMessage}
+                                    modelAction={Background.get_album_art}
+                                    modelProps={[album]}
+                                    setLoading={setLoading}
+                                    setFakekey={setFakekey}
+                                >
+                                    Get Album Art
+                                </RequestLink>
+                                <RequestLink
+                                    loadingMessage="Tagging Tracks..."
+                                    setLoadingMessage={setLoadingMessage}
+                                    modelAction={Background.add_tags_to_album}
+                                    setLoading={setLoading}
+                                    setFakekey={setFakekey}
+                                    onClickSetProps={() => {
+                                        let promptAnswer = prompt(
+                                            "What tags would you like to add? (seperate multiple tags with commas)"
+                                        );
+
+                                        if (promptAnswer) {
+                                            return [
+                                                album.id,
+                                                promptAnswer.split(/ *, */g)
+                                            ];
+                                        } else {
+                                            return false;
+                                        }
+                                    }}
+                                >
+                                    Add Tags To Each Track
+                                </RequestLink>
+                                <RequestLink
+                                    loadingMessage="Finding Tags..."
+                                    setLoadingMessage={setLoadingMessage}
+                                    modelAction={
+                                        Background.find_tags_for_albums_tracks
                                     }
-                                ];
-                            } else {
-                                return false;
-                            }
-                        }}
-                    >
-                        Add Track
-                    </RequestLink>
-                    <RequestLink
-                        loadingMessage="Getting album art..."
-                        setLoadingMessage={setLoadingMessage}
-                        modelAction={Background.get_album_art}
-                        modelProps={[album]}
-                        setLoading={setLoading}
-                        setFakekey={setFakekey}
-                    >
-                        Get Album Art
-                    </RequestLink>
-                    <RequestLink
-                        loadingMessage="Tagging Tracks..."
-                        setLoadingMessage={setLoadingMessage}
-                        modelAction={Background.add_tags_to_album}
-                        setLoading={setLoading}
-                        setFakekey={setFakekey}
-                        onClickSetProps={() => {
-                            let promptAnswer = prompt(
-                                "What tags would you like to add? (seperate multiple tags with commas)"
-                            );
+                                    modelProps={[album.id]}
+                                    setLoading={setLoading}
+                                    setFakekey={setFakekey}
+                                >
+                                    Find Tags For Each Track
+                                </RequestLink>
+                            </NodeMenu>
 
-                            if (promptAnswer) {
-                                return [album.id, promptAnswer.split(/ *, */g)];
-                            } else {
-                                return false;
-                            }
-                        }}
-                    >
-                        Add Tags To Each Track
-                    </RequestLink>
-                    <RequestLink
-                        loadingMessage="Finding Tags..."
-                        setLoadingMessage={setLoadingMessage}
-                        modelAction={Background.find_tags_for_albums_tracks}
-                        modelProps={[album.id]}
-                        setLoading={setLoading}
-                        setFakekey={setFakekey}
-                    >
-                        Find Tags For Each Track
-                    </RequestLink>
-                </NodeMenu>
+                            <FormatDisplay formats={album.formats} />
+                        </div>
+                        <h2 className="Album-subtitle">
+                            <a
+                                onClick={e => {
+                                    e.preventDefault();
+                                    history.push(
+                                        `/collection/artists/${album.artist &&
+                                            album.artist.id}`
+                                    );
+                                }}
+                                className="Album-artist-link"
+                                href={`/collection/artists/${album.artist &&
+                                    album.artist.id}`}
+                            >
+                                {album.artist && album.artist.title}
+                            </a>
+                        </h2>
+                    </div>
+                </div>
 
                 <TrackList
                     tracks={tracks}
@@ -189,6 +228,7 @@ function AlbumShowPage({ match, history, location }) {
                     entityName="Album"
                     editFields={["title", "image_url"]}
                     history={history}
+                    mergeRedirectEndpoint={"albums"}
                     merge
                     move
                 />

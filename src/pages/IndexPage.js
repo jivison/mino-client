@@ -12,6 +12,7 @@ import RequestLink from "../components/helpers/RequestLink";
 import Background from "../models/Background";
 import spotifyClientId from "../api/spotify.private";
 import FormatFilter from "../components/FormatFilter";
+import "../styles/pages/IndexPage.sass";
 
 const endpointToModel = endpoint => {
     return { artists: Artist, albums: Album, tracks: Track }[endpoint];
@@ -38,7 +39,6 @@ function IndexPage({ history }) {
         }).then(response => {
             setSessionFakekey(Math.random());
         });
-        setModel(model);
     };
 
     useEffect(() => {
@@ -113,103 +113,107 @@ function IndexPage({ history }) {
                             );
                         })}
                     >
-                        <h1 className="count-title">
-                            Your{" "}
-                            {model.charAt(0).toUpperCase() +
-                                model
-                                    .split("")
-                                    .splice(1)
-                                    .join("")}{" "}
-                            <span className="subtitle">{entities.length}</span>
-                        </h1>
-                        <FormatFilter
-                            entities={originalEntities}
-                            setFunction={setEntities}
-                        />
-                        <NodeMenu initialPrompt="Change View">
-                            <p
-                                className="option"
-                                onClick={() => {
-                                    changeView("artists");
-                                }}
-                            >
-                                Artists
-                            </p>
-                            <p
-                                className="option"
-                                onClick={() => {
-                                    changeView("albums");
-                                }}
-                            >
-                                Albums
-                            </p>
-                            <p
-                                className="option"
-                                onClick={() => {
-                                    changeView("tracks");
-                                }}
-                            >
-                                Tracks
-                            </p>
-                        </NodeMenu>
-                        <NodeMenu>
-                            <RequestLink
-                                loadingMessage="Creating artist..."
-                                setLoadingMessage={setLoadingMessage}
-                                modelAction={endpointToModel(model).create}
-                                setLoading={setLoading}
-                                setFakekey={setFakekey}
-                                onClickSetProps={() => {
-                                    let promptAnswer = prompt(
-                                        "Which artist would you like to add?"
-                                    );
+                        <div className="IndexPage-header">
+                            <h1 className="count-title">
+                                Your{" "}
+                                {model.charAt(0).toUpperCase() +
+                                    model
+                                        .split("")
+                                        .splice(1)
+                                        .join("")}{" "}
+                                <span className="subtitle">
+                                    {entities.length}
+                                </span>
+                            </h1>
+                            <NodeMenu>
+                                <RequestLink
+                                    loadingMessage="Creating artist..."
+                                    setLoadingMessage={setLoadingMessage}
+                                    modelAction={endpointToModel(model).create}
+                                    setLoading={setLoading}
+                                    setFakekey={setFakekey}
+                                    onClickSetProps={() => {
+                                        let promptAnswer = prompt(
+                                            "Which artist would you like to add?"
+                                        );
 
-                                    if (promptAnswer) {
-                                        return [{ title: promptAnswer }];
-                                    } else {
-                                        return false;
+                                        if (promptAnswer) {
+                                            return [{ title: promptAnswer }];
+                                        } else {
+                                            return false;
+                                        }
+                                    }}
+                                >
+                                    Add Artist
+                                </RequestLink>
+                                <RequestLink
+                                    loadingMessage="Cleaning your collection..."
+                                    setLoadingMessage={setLoadingMessage}
+                                    modelAction={Background.clean_collection}
+                                    setLoading={setLoading}
+                                    setFakekey={setFakekey}
+                                >
+                                    Clean Collection
+                                </RequestLink>
+                                <RequestLink
+                                    loadingMessage="Tagging tracks..."
+                                    setLoadingMessage={setLoadingMessage}
+                                    modelAction={
+                                        Background.find_tags_for_every_track
                                     }
-                                }}
-                            >
-                                Add Artist
-                            </RequestLink>
-                            <RequestLink
-                                loadingMessage="Cleaning your collection..."
-                                setLoadingMessage={setLoadingMessage}
-                                modelAction={Background.clean_collection}
-                                setLoading={setLoading}
-                                setFakekey={setFakekey}
-                            >
-                                Clean Collection
-                            </RequestLink>
-                            <RequestLink
-                                loadingMessage="Tagging tracks..."
-                                setLoadingMessage={setLoadingMessage}
-                                modelAction={
-                                    Background.find_tags_for_every_track
-                                }
-                                setLoading={setLoading}
-                                setFakekey={setFakekey}
-                            >
-                                Find Tags For Each Track
-                            </RequestLink>
-                            <p
-                                onClick={() => {
-                                    history.push("/export");
-                                }}
-                                className="option"
-                            >
-                                {"Export ↗"}
-                            </p>
-                            <p
-                                onClick={() => {
-                                    generatePlaylist();
-                                }}
-                                className="option"
-                            >
-                                {"Generate Spotify Playlist ↗"}
-                            </p>
-                        </NodeMenu>
+                                    setLoading={setLoading}
+                                    setFakekey={setFakekey}
+                                >
+                                    Find Tags For Each Track
+                                </RequestLink>
+                                <p
+                                    onClick={() => {
+                                        history.push("/export");
+                                    }}
+                                    className="option"
+                                >
+                                    {"Export ↗"}
+                                </p>
+                                <p
+                                    onClick={() => {
+                                        generatePlaylist();
+                                    }}
+                                    className="option"
+                                >
+                                    {"Generate Spotify Playlist ↗"}
+                                </p>
+                            </NodeMenu>
+                            <FormatFilter
+                                entities={originalEntities}
+                                setFunction={setEntities}
+                            />
+                            <NodeMenu initialPrompt="Change View">
+                                <p
+                                    className="option"
+                                    onClick={() => {
+                                        changeView("artists");
+                                    }}
+                                >
+                                    Artists
+                                </p>
+                                <p
+                                    className="option"
+                                    onClick={() => {
+                                        changeView("albums");
+                                    }}
+                                >
+                                    Albums
+                                </p>
+                                <p
+                                    className="option"
+                                    onClick={() => {
+                                        changeView("tracks");
+                                    }}
+                                >
+                                    Tracks
+                                </p>
+                            </NodeMenu>
+                        </div>
                     </CardList>
                 </MinoRequest>
             </MinoRequest>

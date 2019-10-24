@@ -2,19 +2,37 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../../styles/helpers/Image.sass";
 
-function Image({ src, circle = false, square = false, width = "auto" }) {
+function Image({
+    src,
+    circle = false,
+    square = false,
+    width,
+    height,
+    className,
+    onLoad = () => {},
+    id=`Image-${Math.random()}`
+}) {
+
+    let styles = width ? {width: width} : {}
+    
+    styles = height ? Object.assign(styles, {height: height}) : styles
+    
     return (
         <img
-            style={{ width: width }}
+            id={id}
+            onLoad={onLoad}
+            style={styles}
             src={src}
             className={
-                circle && square
+                (circle && square
                     ? "Image Image-circle Image-square"
                     : circle
                     ? "Image Image-circle"
-                    : "Image Image-square"
+                    : square
+                    ? "Image Image-square"
+                    : "Image") + " " + className
             }
-        />
+        ></img>
     );
 }
 

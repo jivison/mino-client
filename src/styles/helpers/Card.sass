@@ -1,9 +1,10 @@
 @import "../vars.css"
 
 .Card
-    padding: 1em
     border-radius: 3rem
     margin: 1em
+    padding: 1em
+    display: flex
 
 .Card-titles
     display: flex
@@ -24,6 +25,7 @@
 .Card-content
     display: flex
     align-content: center
+    margin-left: 0.5em
 
     *
         margin: 0
@@ -51,10 +53,8 @@
         font-size: calc( var(--subtitle-size) - 0.2rem )
 
 .Card-image
-    margin-left: 0.5em
-    margin-right: 1em
-    object-fit: cover
-    width: 3vw
+    // Don't know what was overriding this ¯\_(ツ)_/¯
+    width: 3vw !important
     height: 3vw
 
 .Card-image.circular

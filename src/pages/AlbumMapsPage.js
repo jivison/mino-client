@@ -4,6 +4,7 @@ import MinoRequest from "../api/MinoRequest";
 import Card from "../components/helpers/Card";
 import CardList from "../components/helpers/CardList";
 import AlbumMap from "../models/AlbumMap";
+import "../styles/pages/MapsPage.sass"
 
 function AlbumMapsPage({ history }) {
     const [albumMaps, setAlbumMaps] = useState([]);

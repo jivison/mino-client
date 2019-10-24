@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/helpers/FormatDisplay.sass"
 
 const icons = {
     youtube: <i key="Youtube" title="Youtube" className="fab fa-youtube"></i>,

@@ -14,13 +14,17 @@ import {
     AlbumMapShowPage,
     SeedPage,
     AdditionsPage,
-    AdditionShowPage
+    AdditionShowPage,
+    InsightsPage
 } from "./pages/pages";
 import Navbar from "./pages/Navbar";
+import Favicon from "react-favicon"
+import favicon from "./assets/logo-small.ico"
 
 function App() {
     return (
         <div className="App">
+            <Favicon url={favicon} />
             <link
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
                 rel="stylesheet"
@@ -42,6 +46,7 @@ function App() {
                     <Route exact path="/maps/album/:id" component={AlbumMapShowPage} /> 
                     <Route exact path="/additions" component={AdditionsPage} />
                     <Route exact path="/additions/:id" component={AdditionShowPage} />
+                    <Route exact path="/insights" component={InsightsPage} />
                 </Switch>
             </Router>
         </div>

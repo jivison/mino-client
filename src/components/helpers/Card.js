@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "../../styles/helpers/Card.sass";
+import Image from "./Image";
 
 function Card({
     nohover = false,
@@ -21,13 +22,7 @@ function Card({
         >
             <span className="Card-content">
                 {image && (
-                    <img
-                        src={image}
-                        alt={id}
-                        className={
-                            circularImage ? "Card-image circular" : "Card-image"
-                        }
-                    />
+                    <Image circle={circularImage} square src={image} className="Card-image" />
                 )}
                 <div className="Card-titles">
                     <h2 className="Card-title">{title}</h2>

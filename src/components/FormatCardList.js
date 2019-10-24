@@ -27,13 +27,15 @@ function FormatCardList({ formats, trackId, setFakekey }) {
     const removeFormat = event => {
         event.persist();
         let formatName = event.currentTarget.closest(".FormatCard").id;
-        Formatting.destroy(trackId, formatName);
-        setFakekey(Math.random())
-        setFormatsState(
-            formatsState.filter(format => {
-                return format !== formatName;
-            })
-        );
+        console.log(trackId, formatName);
+        Formatting.destroy(trackId, formatName).then(response => {
+            setFakekey(Math.random());
+            setFormatsState(
+                formatsState.filter(format => {
+                    return format !== formatName;
+                })
+            );
+        });
     };
 
     return (
@@ -53,7 +55,9 @@ function FormatCardList({ formats, trackId, setFakekey }) {
                                                 .split("")
                                                 .slice(1)
                                                 .join("")}{" "}
-                                        {icons[format]}
+                                        <span className="FormatCard-icon">
+                                            {icons[format] || icons["unknown"]}
+                                        </span>
                                     </span>
                                     <span
                                         className="FormatCard-remove"

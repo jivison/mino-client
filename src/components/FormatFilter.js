@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/FormatFilter.sass"
 
 function FormatFilter({ entities, setFunction }) {
     const filterEntities = () => {
@@ -25,7 +26,7 @@ function FormatFilter({ entities, setFunction }) {
     ];
 
     return (
-        <select id="FormatFilter-select" onChange={filterEntities}>
+        <select id="FormatFilter-select" className="FormatFilter" onChange={filterEntities}>
             <option value="nofilter">Filter...</option>
             {formats.map(format => {
                 return (

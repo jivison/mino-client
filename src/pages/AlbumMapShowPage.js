@@ -4,6 +4,7 @@ import MinoRequest from "../api/MinoRequest";
 import Image from "../components/helpers/Image";
 import AlbumMap from "../models/AlbumMap";
 import Album from "../models/Album";
+import "../styles/pages/MapShowPage.sass"
 
 function AlbumMapShowPage({ match, history }) {
     const [albumMaps, setAlbumMaps] = useState([]);

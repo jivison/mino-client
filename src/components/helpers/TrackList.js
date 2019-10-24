@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Modal from "react-modal";
 import TrackShow from "../TrackShow";
 import FormatDisplay from "./FormatDisplay";
+import "../../styles/helpers/TrackList.sass";
 
 function TrackList({
     tracks,
@@ -11,38 +12,68 @@ function TrackList({
     setTracks = () => {},
     setFakekey = () => {}
 }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(
+        tracks.reduce((acc, track) => {
+            acc[track.id] = false;
+            return acc;
+        }, {})
+    );
 
-    const openModal = () => {
-        setIsModalOpen(true);
+    const openModal = trackId => {
+        setIsModalOpen(
+            tracks.reduce((acc, track) => {
+                track.id === trackId
+                    ? (acc[track.id] = true)
+                    : (acc[track.id] = false);
+                return acc;
+            }, {})
+        );
     };
 
     const closeModal = () => {
-        setIsModalOpen(false);
+        // close every modal
+        setIsModalOpen(
+            tracks.reduce((acc, track) => {
+                acc[track.id] = false;
+                return acc;
+            }, {})
+        );
     };
 
     return (
         <div className="TrackList">
             {tracks.map((track, index) => {
                 return (
-                    <p>
-                        <span className="subtitle">{index + 1}</span>{" "}
-                        {track.title}
-                        {!editable && <FormatDisplay formats={track.formats} />}
-                        {editable && (
-                            <>
+                    <div className="TrackList-track" key={track.id}>
+                        <div>
+                            <span className="TrackList-count subtitle">
+                                {index + 1}
+                            </span>{" "}
+                            <span className="TrackList-title">
+                                {track.title}
+                            </span>
+                        </div>
+                        <div className="TrackList-formats">
+                            {!editable && (
                                 <FormatDisplay formats={track.formats} />
-                                <button
-                                    onClick={openModal}
-                                    className="no-button"
-                                >
-                                    Details
-                                </button>
-                            </>
-                        )}
+                            )}
+                            {editable && (
+                                <>
+                                    <FormatDisplay formats={track.formats} />
+                                    <button
+                                        onClick={() => {
+                                            openModal(track.id);
+                                        }}
+                                        className="no-button"
+                                    >
+                                        Details
+                                    </button>
+                                </>
+                            )}
+                        </div>
                         {editable && (
                             <Modal
-                                isOpen={isModalOpen}
+                                isOpen={isModalOpen[track.id]}
                                 onRequestClose={closeModal}
                             >
                                 <button
@@ -60,7 +91,7 @@ function TrackList({
                                 />
                             </Modal>
                         )}
-                    </p>
+                    </div>
                 );
             })}
         </div>

@@ -5,6 +5,7 @@ import MinoRequest from "../../api/MinoRequest";
 import Select from "react-select";
 import Form from "./Form";
 import FormField from "./FormField";
+import "../../styles/helpers/MoveModal.sass";
 
 function MoveModal({
     isOpen,
@@ -46,19 +47,21 @@ function MoveModal({
                         });
                     }}
                 >
-                    <label htmlFor="target_id">Target</label>
-                    <Select
-                        autoFocus={true}
-                        className="fancy-dropdown"
-                        isSearchable={true}
-                        name="target_id"
-                        options={moveList.map(artist => {
-                            return {
-                                value: artist.id,
-                                label: artist.title
-                            };
-                        })}
-                    ></Select>
+                    <div className="Dropdown-select">
+                        <label htmlFor="target_id">Target</label>
+                        <Select
+                            autoFocus={true}
+                            className="MoveModal-dropdown"
+                            isSearchable={true}
+                            name="target_id"
+                            options={moveList.map(artist => {
+                                return {
+                                    value: artist.id,
+                                    label: artist.title
+                                };
+                            })}
+                        ></Select>
+                    </div>
                     <FormField submit title="Move Artists" />
                 </Form>
             </Modal>

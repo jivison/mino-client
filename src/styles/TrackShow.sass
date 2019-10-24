@@ -1,0 +1,59 @@
+@import "./vars.css"
+
+.TrackShow-title
+    font-size: 3em
+    margin-bottom: 0.2em
+    color: black
+
+
+.TrackShow-id
+    font-size: 0.5em
+    color: var(--mute-colour)
+
+.TrackShow-card-deck
+    color: black
+    display: flex
+    flex-wrap: wrap
+
+.FormatCard, .TagCard
+    color: black
+    width: 20vw
+    margin: 0
+
+    .Card-content
+        width: 100%
+
+        .Card-titles
+            width: 100%
+
+            .Card-title
+                width: 100%
+                justify-content: space-between
+
+                .FormatCard-icon
+                    color: var(--mute-colour)
+                    font-size: 0.8em
+                    margin-left: 0.5em
+
+                .FormatCard-remove, .TagCard-remove
+                    color: red
+
+                    &:hover
+                        cursor: pointer
+                        color: rgb(155, 0, 0)
+
+.FormatCardList, .TagCardList
+    width: 48.1%
+    border: 2px lightgrey solid
+    padding: 2em
+    border-radius: 3em
+    margin: 1em
+    color: black
+
+    .Form
+        .FormField
+            width: 45%
+            display: flex
+            flex-direction: row
+            align-items: center
+            justify-content: space-between

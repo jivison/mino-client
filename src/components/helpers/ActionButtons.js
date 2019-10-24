@@ -13,7 +13,8 @@ function ActionButtons({
     entityName = "",
     entity = {},
     setFunction = () => {},
-    history
+    history,
+    mergeRedirectEndpoint
 }) {
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [mergeModalIsOpen, setMergeModalIsOpen] = useState(false);
@@ -77,6 +78,9 @@ function ActionButtons({
                     targetModel={model}
                     entity={entity}
                     entityName={entityName}
+                    history={history}
+                    mergeRedirectEndpoint={mergeRedirectEndpoint}
+                    setFunction={setFunction}
                 />
             )}
 

@@ -4,6 +4,7 @@ import Track from "../models/Track";
 import MoveModal from "./helpers/MoveModal";
 import FormatCardList from "./FormatCardList";
 import TagCardList from "./TagCardList";
+import "../styles/TrackShow.sass";
 
 function TrackShow({ initialTrack, artist, setTracks, tracks, setFakekey }) {
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
@@ -25,23 +26,44 @@ function TrackShow({ initialTrack, artist, setTracks, tracks, setFakekey }) {
         setMoveModalIsOpen(false);
     };
 
+    const deleteTrack = id => {
+        Track.destroy(id).then(response => {
+            setTracks(
+                tracks.filter(track => {
+                    return track.id !== response.id;
+                })
+            );
+        });
+    };
+
     return (
         <div>
             <h1 className="TrackShow-title">
+                <span className="TrackShow-id">№ {track.id}: </span>
                 {track.title}{" "}
                 <span className="TrackShow-subtitle">by {artist.title}</span>
             </h1>
+            <div className="TrackShow-card-deck">
+                <FormatCardList
+                    formats={track.formats}
+                    trackId={track.id}
+                    setFakekey={setFakekey}
+                />
+                <TagCardList
+                    tags={track.tags}
+                    trackId={track.id}
+                    setFakekey={setFakekey}
+                />
+            </div>
 
-            <FormatCardList
-                formats={track.formats}
-                trackId={track.id}
-                setFakekey={setFakekey}
-            />
-            <TagCardList
-                tags={track.tags}
-                trackId={track.id}
-                setFakekey={setFakekey}
-            />
+            <button
+                className="delete button"
+                onClick={() => {
+                    deleteTrack(track.id);
+                }}
+            >
+                Delete
+            </button>
 
             <button className="edit button" onClick={openEditModal}>
                 Edit
