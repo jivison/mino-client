@@ -44,7 +44,7 @@ function ActionButtons({
     };
 
     return (
-        <div className="CrudButtons">
+        <div className="ActionButtons">
             <button
                 onClick={() => {
                     model.delete(entity.id).then(response => {

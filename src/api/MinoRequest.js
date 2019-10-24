@@ -27,7 +27,7 @@ function MinoRequest({
 
     return loading ? (
         !noLoading ? (
-            "Loading..."
+            <p className="MinoRequest-loading">Loading...</p>
         ) : (
             ""
         )

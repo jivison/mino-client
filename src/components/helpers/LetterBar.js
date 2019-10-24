@@ -5,7 +5,13 @@ import "../../styles/helpers/LetterBar.sass";
 function LetterBar({ letters }) {
     return (
         <div className="LetterBar">
-            {letters.map(letter => (
+            {(letters.length > 25
+                ? letters.reduce((acc, letter, idx) => {
+                      (idx % 3 === 0 ? [] : acc).push(letter);
+                      return acc;
+                  }, [])
+                : letters
+            ).map(letter => (
                 <a className="letter" href={`#${letter}`} key={letter}>
                     <p>{letter}</p>
                 </a>

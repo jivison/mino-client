@@ -288,30 +288,31 @@ function InsightsPage() {
                                     title="Tag Wordcloud"
                                     widthOverride="47%"
                                 >
-                                    <div
-                                        style={{
-                                            height: "50vh",
-                                            width: "100%"
-                                        }}
-                                    >
-                                        <ReactWordCloud
-                                            words={wordcloudData}
-                                            height="500px"
-                                            options={{
-                                                fontFamily: "Noto Sans KR",
-                                                fontSizes: [10, 100],
-                                                rotations: 3,
-                                                rotationAngles: [-30, 30],
-                                                colors: [
-                                                    "#00b2b2",
-                                                    "#008080",
-                                                    "#005959",
-                                                    "#004747",
-                                                    "#002a2a"
-                                                ]
+                                        <div
+                                            style={{
+                                                height: "50vh",
+                                                width: "100%"
                                             }}
-                                        />
-                                    </div>
+                                        >
+                                            <ReactWordCloud
+                                                words={wordcloudData}
+                                                height="500px"
+                                                options={{
+                                                    fontFamily: "Noto Sans KR",
+                                                    fontSizes: [10, 100],
+                                                    rotations: 3,
+                                                    rotationAngles: [-30, 30],
+                                                    colors: [
+                                                        "#00b2b2",
+                                                        "#008080",
+                                                        "#005959",
+                                                        "#004747",
+                                                        "#002a2a"
+                                                    ]
+                                                }}
+                                            />
+                                        </div>
+                                    
                                 </InsightCard>
                                 <InsightCard
                                     title="Your top 30 Tags"

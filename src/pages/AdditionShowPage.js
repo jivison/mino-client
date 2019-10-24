@@ -4,6 +4,7 @@ import MinoRequest from "../api/MinoRequest";
 import Addition from "../models/Addition";
 import CardList from "../components/helpers/CardList";
 import Card from "../components/helpers/Card";
+import "../styles/pages/AdditionShowPage.sass";
 
 function AdditionShowPage({ match, history }) {
     const [addition, setAddition] = useState({});

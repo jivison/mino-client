@@ -11,6 +11,7 @@ import Background from "../models/Background";
 import Album from "../models/Album";
 import FormatDisplay from "../components/helpers/FormatDisplay";
 import "../styles/pages/ArtistShowPage.sass";
+import Grade from "grade-js"
 
 function ArtistShowPage({ match, history }) {
     const [artist, setArtist] = useState({});
@@ -34,13 +35,19 @@ function ArtistShowPage({ match, history }) {
                 fakekey={fakekey}
             >
                 <div className="ArtistShowPage-header">
-                    <Image
+                    <img
+                        id="artist-image"
+                        crossOrigin="anonymous"
+                        className="Image-square Image-circle Image"
+                        style={{ width: "10vw", height: "10vw" }}
                         src={artist.image_url}
-                        width="8vw"
-                        height="8vw"
-                        circle
-                        square
-                    />
+                        onLoad={() => {
+                            Grade(
+                                document.querySelectorAll("html"),
+                                "#artist-image"
+                            );
+                        }}
+                    ></img>
                     <h1
                         className="as-link Artist-title"
                         onClick={() => {

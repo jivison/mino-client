@@ -12,6 +12,8 @@ function Page({
 }) {
     document.title = "Mino" + (title ? " | " + title : "");
 
+    document.querySelector("html").style.background = "black"
+    
     return (
         <div className="Page">
             {loadingOverlay ? (

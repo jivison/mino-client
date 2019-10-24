@@ -11,6 +11,7 @@ function RequestLink({
     setFakekey = () => {},
     onClickSetProps,
     className = "",
+    callback = () => {},
     children
 }) {
     return (
@@ -24,6 +25,7 @@ function RequestLink({
                         post(
                             response => {
                                 setFakekey(Math.random());
+                                callback(response);
                             },
                             modelAction,
                             modelProps,
@@ -36,6 +38,7 @@ function RequestLink({
                     post(
                         response => {
                             setFakekey(Math.random());
+                            callback(response);
                         },
                         modelAction,
                         modelProps,
