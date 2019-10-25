@@ -28,7 +28,7 @@ function AdditionShowPage({ match, history }) {
 
                 <button className="button delete" onClick={() => {
                     Addition.destroy(addition.id).then((response) => {
-                        history.push(`/`)
+                        history.push(`/additions`)
                     })
                 }}>Undo addition</button>
 

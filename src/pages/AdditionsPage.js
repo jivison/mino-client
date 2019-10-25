@@ -29,7 +29,7 @@ function AdditionsPage({history}) {
                 setFunction={setOriginalAdditions}
             >
                 <CardList
-                    cards={additions.map(addition => {
+                    cards={additions.reverse().map(addition => {
                         return (
                             <Card
                                 title={

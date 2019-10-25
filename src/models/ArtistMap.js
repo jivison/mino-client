@@ -11,6 +11,10 @@ const ArtistMap = {
 
     destroy(id) {
         return query(`artist_maps/${id}`, "delete");
+    },
+
+    create(params) {
+        return query("artist_maps", "post", params)
     }
 };
 

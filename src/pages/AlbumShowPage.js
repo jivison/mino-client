@@ -94,20 +94,6 @@ function AlbumShowPage({ match, history, location }) {
                             );
                         }}
                     ></img>
-                    {
-                        // <Image
-                        //             src={album.image_url}
-                        //             width="10vw"
-                        //             id="album-image"
-                        //             square
-                        //             onLoad={() => {
-                        //                 Grade(
-                        //                     document.querySelectorAll("body"),
-                        //                     "#album-image"
-                        //                 );
-                        //             }}
-                        //         />
-                    }
                     <div className="AlbumShowPage-titles">
                         <div className="AlbumShowPage-title-container">
                             <h1

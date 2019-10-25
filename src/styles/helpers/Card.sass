@@ -12,7 +12,9 @@
 
 .Card-children
     margin-top: 1em
-    margin-left: 2em
+    margin-left: 
+    font-family: var(--body-fonts)
+    padding-left: 2em
 
 .Card-hover
     &:hover
@@ -21,6 +23,11 @@
 
     &:active
         background: var(--bg-active)
+
+.Card-border
+    border: 2px solid var(--border-colour)
+    box-shadow: 3px 3px var(--mute-colour)
+    
 
 .Card-content
     display: flex

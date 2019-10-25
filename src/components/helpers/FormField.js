@@ -10,12 +10,13 @@ function FormField({
     submit = false,
     min = null,
     placeholder = null,
-    changeHandler = () => {}
+    changeHandler = () => {},
+    inputHandler = () => {}
 }) {
     return submit ? (
         <input type="submit" className="button submit-button" value={title || name} />
     ) : (
-        <div className="FormField" onChange={changeHandler} id={id || `FormField-${name}`}>
+        <div className="FormField" onChange={changeHandler} onInput={inputHandler} id={id || `FormField-${name}`}>
             {type !== "hidden" && <label>{title}</label>}
 
             {type === "textarea" ? (

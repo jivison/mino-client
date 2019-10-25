@@ -68,7 +68,7 @@ const renderFields = {
                 />
                 <FormField
                     title="Catalog №"
-                    name="catalog-no"
+                    name="catno"
                     placeholder="eg. PMC 7009"
                 />
                 <FormField
@@ -80,7 +80,7 @@ const renderFields = {
                 />
             </div>
         ),
-        fields: ["album", "artist", "barcode", "catalog-no", "year"]
+        fields: ["album", "artist", "barcode", "catno", "year"]
     }
 };
 

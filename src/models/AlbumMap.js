@@ -10,7 +10,11 @@ const AlbumMap = {
     },
 
     destroy(id) {
-        return query(`albums_maps/${id}`, "delete");
+        return query(`album_maps/${id}`, "delete");
+    },
+
+    create(params) {
+        return query('album_maps', "post", params)
     }
 }
 

@@ -28,7 +28,7 @@ function ExternalPlaylistPage() {
             {!messages && (
                 <>
                     <p className="description">
-                        This will authenticate you with Spotify and then attempt
+                        This will authenticate you with Spotifyand then attempt
                         to create a playlist with your collection.
                         <br />
                         The playlist will be called 'My Mino Collection'

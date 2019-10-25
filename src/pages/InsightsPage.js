@@ -93,7 +93,7 @@ function InsightsPage() {
                                         additions <br />
                                         <span className="highlight">
                                             {data.maps.length -
-                                                data.tracks.length}
+                                                data.albums.length - data.artists.length}
                                         </span>{" "}
                                         maps <br />
                                     </p>
@@ -101,7 +101,6 @@ function InsightsPage() {
                                 <InsightCard title="Top Artists">
                                     <ul className="top-artists-list">
                                         {data.top_artists
-                                            .reverse()
                                             .slice(0, 5)
                                             .map((artist, index) => {
                                                 return (
@@ -123,7 +122,6 @@ function InsightsPage() {
                                 <InsightCard title="Top Albums">
                                     <ul className="top-albums-list">
                                         {data.top_albums
-                                            .reverse()
                                             .slice(0, 5)
                                             .map((album, index) => {
                                                 return (

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import LoadingOverlay from "react-loading-overlay";
-import "../styles/pages/Page.sass"
+import "../styles/pages/Page.sass";
 
 function Page({
     title,
@@ -12,8 +12,11 @@ function Page({
 }) {
     document.title = "Mino" + (title ? " | " + title : "");
 
-    document.querySelector("html").style.background = "black"
-    
+    useEffect(() => {
+        document.querySelector("html").style.background = "black";
+        return () => {};
+    }, []);
+
     return (
         <div className="Page">
             {loadingOverlay ? (
