@@ -5,12 +5,22 @@ import Addition from "../models/Addition";
 import CardList from "../components/helpers/CardList";
 import Card from "../components/helpers/Card";
 import "../styles/pages/AdditionShowPage.sass";
+import NodeMenu from "../components/helpers/NodeMenu";
+import RequestLink from "../components/helpers/RequestLink";
+import Background from "../models/Background";
 
 function AdditionShowPage({ match, history }) {
     const [addition, setAddition] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [loadingMessage, setLoadingMessage] = useState("Loading...");
 
     return (
-        <Page title="Addition">
+        <Page
+            title="Addition"
+            loadingOverlay
+            loadingMessage={loadingMessage}
+            isLoading={loading}
+        >
             <MinoRequest
                 modelAction={Addition.one}
                 modelProps={[match.params.id]}
@@ -26,11 +36,41 @@ function AdditionShowPage({ match, history }) {
                     Contains {addition.tracks && addition.tracks.length} tracks.
                 </h2>
 
-                <button className="button delete" onClick={() => {
-                    Addition.destroy(addition.id).then((response) => {
-                        history.push(`/additions`)
-                    })
-                }}>Undo addition</button>
+                <div className="action-buttons">
+                    <RequestLink
+                        className="button"
+                        isOption={false}
+                        loadingMessage="Cleaning addition..."
+                        setLoadingMessage={setLoadingMessage}
+                        setLoading={setLoading}
+                        modelAction={Background.clean_addition}
+                        modelProps={[addition.id]}
+                    >
+                        Clean Addition
+                    </RequestLink>
+                    <RequestLink
+                        className="button"
+                        isOption={false}
+                        loadingMessage="Tagging tracks..."
+                        setLoadingMessage={setLoadingMessage}
+                        setLoading={setLoading}
+                        modelAction={Background.tag_addition}
+                        modelProps={[addition.id]}
+                    >
+                        Find Tags For Each Track
+                    </RequestLink>
+
+                    <button
+                        className="button delete"
+                        onClick={() => {
+                            Addition.destroy(addition.id).then(response => {
+                                history.push(`/additions`);
+                            });
+                        }}
+                    >
+                        Undo addition
+                    </button>
+                </div>
 
                 <CardList
                     letterBar
@@ -50,10 +90,10 @@ function AdditionShowPage({ match, history }) {
                             .map(track => {
                                 return (
                                     <Card
+                                        small
                                         id={track.sort_title}
                                         key={track.id}
                                         image={track.album.image_url}
-                                        // circularImage={true}
                                         title={<>{track.title}</>}
                                         subtitle={
                                             track.artist && track.artist.title
@@ -64,12 +104,14 @@ function AdditionShowPage({ match, history }) {
                                                 `/collection/albums/${entityId}?addition=${addition.id}`
                                             );
                                         }}
-                                    ></Card>
+                                    />
                                 );
                             })
                     }
                 >
-                    <h2 className="Addition-tracks-title">Tracks in this addition:</h2>
+                    <h2 className="Addition-tracks-title">
+                        Tracks in this addition:
+                    </h2>
                 </CardList>
             </MinoRequest>
         </Page>

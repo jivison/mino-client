@@ -16,7 +16,7 @@ function RequestLink({
 }) {
     return (
         <p
-            className={(isOption ? "option" : "") + className}
+            className={(isOption ? "option" : "") + " " + className}
             onClick={() => {
                 if (onClickSetProps) {
                     modelProps = onClickSetProps();

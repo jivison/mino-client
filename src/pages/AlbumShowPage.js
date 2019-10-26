@@ -25,7 +25,6 @@ function AlbumShowPage({ match, history, location }) {
         new URLSearchParams(location.search).get("addition")
     );
 
-    console.log(additionId);
     useEffect(() => {
         console.log(album.tracks);
         if (additionId && album.tracks) {

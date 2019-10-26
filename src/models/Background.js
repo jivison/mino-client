@@ -5,6 +5,12 @@ const Background = {
         return query("$/find_tags_for_every_track", "post", {});
     },
 
+    tag_addition(addition_id) {
+        return query("$/find_tags_for_every_track", "post", {
+            addition_id: addition_id
+        });
+    },
+
     get_album_art(album) {
         return query("$/get_album_art", "post", {
             album_id: album.id,
@@ -43,15 +49,21 @@ const Background = {
     },
 
     clean_collection() {
-        return query("$/clean_collection", "post", {})
+        return query("$/clean_collection", "post", {});
     },
-    
+
+    clean_addition(addition_id) {
+        return query("$/clean_collection", "post", {
+            addition_id: addition_id
+        });
+    },
+
     change_session(params) {
-        return query("$/change_session", "post", params)
+        return query("$/change_session", "post", params);
     },
 
     get_session(session_key) {
-        return query(`$/get_session?session_key=${session_key}`)
+        return query(`$/get_session?session_key=${session_key}`);
     }
 };
 

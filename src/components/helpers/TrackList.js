@@ -10,7 +10,8 @@ function TrackList({
     editable = false,
     artist = {},
     setTracks = () => {},
-    setFakekey = () => {}
+    setFakekey = () => {},
+    history = []
 }) {
     const [isModalOpen, setIsModalOpen] = useState(
         tracks.reduce((acc, track) => {
@@ -88,6 +89,7 @@ function TrackList({
                                     setTracks={setTracks}
                                     tracks={tracks}
                                     setFakekey={setFakekey}
+                                    history={history}
                                 />
                             </Modal>
                         )}

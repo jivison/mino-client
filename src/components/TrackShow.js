@@ -6,7 +6,13 @@ import FormatCardList from "./FormatCardList";
 import TagCardList from "./TagCardList";
 import "../styles/TrackShow.sass";
 
-function TrackShow({ initialTrack, artist, setTracks, tracks, setFakekey }) {
+function TrackShow({
+    initialTrack,
+    artist,
+    setTracks,
+    tracks,
+    setFakekey
+}) {
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
     const [moveModalIsOpen, setMoveModalIsOpen] = useState(false);
     const [errors, setErrors] = useState([]);
@@ -105,6 +111,9 @@ function TrackShow({ initialTrack, artist, setTracks, tracks, setFakekey }) {
                 entity={track}
                 entityName="Track"
                 setFunction={setTrack}
+                callback={response => {
+                    window.location.href = `/collection/albums/${response.id}`;
+                }}
             />
         </div>
     );

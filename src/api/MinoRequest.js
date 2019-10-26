@@ -13,6 +13,7 @@ function MinoRequest({
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true)
         modelAction(...modelProps).then(data => {
             if (part) {
                 setFunction(data[part])

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Page from "./Page";
 import RequestLink from "../components/helpers/RequestLink";
 import Creation from "../models/Creation";
+import LostAndFound from "../components/LostAndFound";
 
 function ExternalPlaylistPage() {
     const [loading, setLoading] = useState(false);
@@ -42,7 +43,6 @@ function ExternalPlaylistPage() {
                         modelProps={[{ access_token: accessToken }]}
                         setLoading={setLoading}
                         callback={response => {
-                            console.log(response);
                             if (response.new_playlist) {
                                 setMessages(
                                     <>
@@ -60,6 +60,7 @@ function ExternalPlaylistPage() {
                                                 {"View it on Spotify ↗"}
                                             </a>
                                         </p>
+                                        <LostAndFound lost={response.lost_tracks} found={response.found_tracks} />
                                     </>
                                 );
                             } else {

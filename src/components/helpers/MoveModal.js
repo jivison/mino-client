@@ -13,7 +13,8 @@ function MoveModal({
     targetModel,
     entity,
     entityName,
-    setFunction
+    setFunction,
+    callback = () => {}
 }) {
     const [moveList, setMoveList] = useState([]);
     const [fakekey, setFakekey] = useState(Math.random());
@@ -40,10 +41,10 @@ function MoveModal({
                     title={`Move ${entityName}s`}
                     submitHandler={data => {
                         targetModel.move(entity.id, data).then(response => {
-                            console.log(response);
                             setFunction(response);
                             setFakekey(Math.random());
                             closeModal();
+                            callback(response)
                         });
                     }}
                 >
@@ -62,7 +63,7 @@ function MoveModal({
                             })}
                         ></Select>
                     </div>
-                    <FormField submit title="Move Artists" />
+                    <FormField submit title={`Move ${entityName}s`} />
                 </Form>
             </Modal>
         </MinoRequest>

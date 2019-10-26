@@ -5,6 +5,7 @@
     margin: 1em
     padding: 1em
     display: flex
+    color: black
 
 .Card-titles
     display: flex
@@ -67,3 +68,19 @@
 
 .Card-image.circular
     border-radius: 50%
+
+.Card-small
+    font-size: 0.85em
+    
+    .Card-subtitle
+        font-size: 0.9em
+    
+    .Card-image
+        // Don't know what was overriding this ¯\_(ツ)_/¯
+        width: 2vw !important
+        height: 2vw
+
+.Card-check
+    font-size: 1.5em
+    margin-top: 1.5vh
+    margin-right: 1.5vh

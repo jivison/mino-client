@@ -78,6 +78,7 @@ function IndexPage({ history }) {
                         cards={entities.map(entity => {
                             return (
                                 <Card
+                                    small={model === "tracks"}
                                     id={entity.sort_title}
                                     key={entity.id}
                                     image={
