@@ -3,6 +3,7 @@ import CardList from "./helpers/CardList";
 import Card from "./helpers/Card";
 import Tagging from "../models/Tagging";
 import AddTag from "./AddTag";
+import { humanize } from "../helpers";
 
 function TagCardList({ tags, trackId, setFakekey }) {
     const [tagsState, setTagsState] = useState(tags);
@@ -31,11 +32,7 @@ function TagCardList({ tags, trackId, setFakekey }) {
                             title={
                                 <>
                                     <span className="TagCard-title">
-                                        {tag.charAt(0).toUpperCase() +
-                                            tag
-                                                .split("")
-                                                .slice(1)
-                                                .join("")}{" "}
+                                        {humanize(tag)}{" "}
                                     </span>
                                     <span
                                         className="TagCard-remove"

@@ -54,7 +54,7 @@ function AlbumMapShowPage({ match, history }) {
                     setFunction={setAlbum}
                     noLoading={true}
                 >
-                    <Image src={album.image_url} width="10vw" circle square />
+                    <Image src={album.image_url} width="10vw" height="10vw" circle square />
                     <h1 className="Album-title">
                         <span
                             className="as-link"

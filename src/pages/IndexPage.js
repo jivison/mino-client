@@ -70,6 +70,7 @@ function IndexPage({ history }) {
                     setFunction={setOriginalEntities}
                     modelAction={endpointToModel(model).all}
                     fakekey={fakekey}
+                    noReload={false}
                 >
                     <CardList
                         letterBar

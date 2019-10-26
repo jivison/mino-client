@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Page from "./Page";
 import MinoRequest from "../api/MinoRequest";
 import Artist from "../models/Artist";
-import Image from "../components/helpers/Image";
 import AlbumArtistList from "../components/AlbumArtistList";
 import ActionButtons from "../components/helpers/ActionButtons";
 import NodeMenu from "../components/helpers/NodeMenu";
@@ -11,15 +10,34 @@ import Background from "../models/Background";
 import Album from "../models/Album";
 import FormatDisplay from "../components/helpers/FormatDisplay";
 import "../styles/pages/ArtistShowPage.sass";
-import Grade from "grade-js"
+import Grade from "grade-js";
+import { corsSafeRequest } from "../helpers";
+
 
 function ArtistShowPage({ match, history }) {
     const [artist, setArtist] = useState({});
     const [loading, setLoading] = useState(false);
     const [loadingMessage, setLoadingMessage] = useState("Loading...");
     const [fakekey, setFakekey] = useState(Math.random());
+    const [useCORS, setUseCORS] = useState(true)
 
     const artistId = match.params.id;
+
+
+    useEffect(() => {
+        artist.image_url &&
+            corsSafeRequest(
+                "GET",
+                artist.image_url,
+                (success) => {
+                    setUseCORS(true);
+                },
+                (fail) => {
+                    setUseCORS(false);
+                }
+            );
+        return () => {};
+    }, [artist.image_url]);
 
     return (
         <Page
@@ -35,19 +53,28 @@ function ArtistShowPage({ match, history }) {
                 fakekey={fakekey}
             >
                 <div className="ArtistShowPage-header">
-                    <img
-                        id="artist-image"
-                        crossOrigin="anonymous"
-                        className="Image-square Image-circle Image"
-                        style={{ width: "10vw", height: "10vw" }}
-                        src={artist.image_url}
-                        onLoad={() => {
-                            Grade(
-                                document.querySelectorAll("html"),
-                                "#artist-image"
-                            );
-                        }}
-                    ></img>
+                    {useCORS ? (
+                        <img
+                            id="artist-image"
+                            className="Image-square Image"
+                            style={{ width: "10vw", height: "10vw" }}
+                            src={artist.image_url}
+                            crossOrigin="anonymous"
+                            onLoad={event => {
+                                Grade(
+                                    document.querySelectorAll("html"),
+                                    "#artist-image"
+                                );
+                            }}
+                        />
+                    ) : (
+                        <img
+                            id="artist-image"
+                            className="Image-square Image"
+                            style={{ width: "10vw", height: "10vw" }}
+                            src={artist.image_url + `?nocache=${new Date()}`}
+                        />
+                    )}
                     <h1
                         className="as-link Artist-title"
                         onClick={() => {

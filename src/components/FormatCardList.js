@@ -3,6 +3,7 @@ import CardList from "./helpers/CardList";
 import Card from "./helpers/Card";
 import Formatting from "../models/Formatting";
 import AddFormat from "./AddFormat";
+import { humanize } from "../helpers";
 
 const icons = {
     youtube: <i key="Youtube" title="Youtube" className="fab fa-youtube"></i>,
@@ -50,11 +51,7 @@ function FormatCardList({ formats, trackId, setFakekey }) {
                             title={
                                 <>
                                     <span className="FormatCard-title">
-                                        {format.charAt(0).toUpperCase() +
-                                            format
-                                                .split("")
-                                                .slice(1)
-                                                .join("")}{" "}
+                                        {humanize(format)}{" "}
                                         <span className="FormatCard-icon">
                                             {icons[format] || icons["unknown"]}
                                         </span>

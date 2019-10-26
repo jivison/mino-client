@@ -6,6 +6,7 @@ function MinoRequest({
     modelProps = [],
     setFunction,
     noLoading,
+    noReload = true,
     children,
     part,
     fakekey = ""
@@ -13,10 +14,10 @@ function MinoRequest({
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true)
+        !noReload && setLoading(true);
         modelAction(...modelProps).then(data => {
             if (part) {
-                setFunction(data[part])
+                setFunction(data[part]);
             } else {
                 setFunction(data);
             }

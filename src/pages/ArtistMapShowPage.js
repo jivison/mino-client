@@ -51,7 +51,7 @@ function ArtistMapShowPage({ history, match }) {
                     setFunction={setArtist}
                     noLoading={true}
                 >
-                    <Image src={artist.image_url} width="10vw" circle square />
+                    <Image src={artist.image_url} width="10vw" height="10vw" circle square />
                     <h1 className="Artist-title">
                         <span
                             onClick={() => {

@@ -3,12 +3,19 @@
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
     box-sizing: border-box;
+    color: var(--font-colour);
+    background: var(--bg-default);
 }
 
 *,
 *:before,
 *:after {
     box-sizing: inherit;
+}
+
+/* Images were being resized based on their margin */
+img {
+    box-sizing: content-box;
 }
 
 p,

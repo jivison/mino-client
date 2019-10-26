@@ -10,7 +10,7 @@
     font-family: var(--title-fonts)
 
 [class$="description"]
-    color: black
+    color: var(--font-colour)
     font-family: var(--body-fonts)
 
 [class$="list"]
@@ -31,17 +31,16 @@
     &:active
         color: var(--link-active)
 
-    
-
 .button, .no-button
-    color: black
-    border: 2px black solid
+    color: var(--font-colour)
+    border: 2px var(--font-colour) solid
     padding: 0.3em 0.9em
     margin: 0.5em
     border-radius: 2em
     font-size: 1em
     background: transparent
     font-family: var(--body-fonts)
+    cursor: pointer
 
     &:hover
         background: var(--bg-hover)
@@ -54,6 +53,7 @@
 .no-button
     border: none
     background: inherit
+    color: var(--link-colour)
 
     &:hover
         background: inherit
@@ -75,4 +75,10 @@
 
 .edit
     &:hover
-        background: rgb(239, 253, 114)
+        background: rgb(253, 227, 114)
+
+.ReactModal__Content
+    background: var(--bg-default) !important
+
+.ReactModal__Overlay
+    background: var(--bg-hover-mute) !important 

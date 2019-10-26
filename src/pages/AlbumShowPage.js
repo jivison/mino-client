@@ -12,21 +12,37 @@ import FormatDisplay from "../components/helpers/FormatDisplay";
 import Track from "../models/Track";
 import "../styles/pages/AlbumShowPage.sass";
 import Grade from "grade-js";
+import Warning from "../icons/Warning";
+import { corsSafeRequest } from "../helpers";
 
 function AlbumShowPage({ match, history, location }) {
     const [album, setAlbum] = useState({});
     const [tracks, setTracks] = useState([]);
     const [fakekey, setFakekey] = useState(Math.random());
-    // Loading with post requests
     const [loading, setLoading] = useState(false);
     const [loadingMessage, setLoadingMessage] = useState("Loading...");
+    const [useCORS, setUseCORS] = useState(true);
 
     let additionId = parseInt(
         new URLSearchParams(location.search).get("addition")
     );
 
     useEffect(() => {
-        console.log(album.tracks);
+        album.image_url &&
+            corsSafeRequest(
+                "GET",
+                album.image_url,
+                (success) => {
+                    setUseCORS(true);
+                },
+                (fail) => {
+                    setUseCORS(false);
+                }
+            );
+        return () => {};
+    }, [album.image_url]);
+
+    useEffect(() => {
         if (additionId && album.tracks) {
             setTracks(
                 album.tracks.filter(track => {
@@ -54,11 +70,12 @@ function AlbumShowPage({ match, history, location }) {
                 setFunction={setAlbum}
                 fakekey={fakekey}
             >
-                {additionId === NaN && (
+                {!isNaN(additionId) && (
                     <p className="AlbumShowPage-addition-description">
-                        You are viewing only the tracks that belong to the
-                        addition{" "}
+                        <Warning /> You are viewing only the tracks that belong
+                        to the addition{" "}
                         <a
+                            className="addition-link"
                             href="#"
                             onClick={() => {
                                 history.push(`/additions/${additionId}`);
@@ -68,9 +85,10 @@ function AlbumShowPage({ match, history, location }) {
                         </a>
                         <br />
                         <a
+                            className="original-album-link"
                             href="#"
                             onClick={() => {
-                                history.push(`/collection/albums/${album.id}`);
+                                window.location.href = `/collection/albums/${album.id}`;
                             }}
                         >
                             Click here
@@ -79,20 +97,28 @@ function AlbumShowPage({ match, history, location }) {
                     </p>
                 )}
                 <div className="AlbumShowPage-header">
-                    <img
-                        id="album-image"
-                        crossOrigin="anonymous"
-                        className="Image-square Image"
-                        style={{width:"10vw",
-                        height:"10vw"}}
-                        src={album.image_url}
-                        onLoad={() => {
-                            Grade(
-                                document.querySelectorAll("html"),
-                                "#album-image"
-                            );
-                        }}
-                    ></img>
+                    {useCORS ? (
+                        <img
+                            id="album-image"
+                            className="Image-square Image"
+                            style={{ width: "10vw", height: "10vw" }}
+                            src={album.image_url}
+                            crossOrigin="anonymous"
+                            onLoad={event => {
+                                Grade(
+                                    document.querySelectorAll("html"),
+                                    "#album-image"
+                                );
+                            }}
+                        />
+                    ) : (
+                        <img
+                            id="album-image"
+                            className="Image-square Image"
+                            style={{ width: "10vw", height: "10vw" }}
+                            src={album.image_url + `?nocache=${new Date()}`}
+                        />
+                    )}
                     <div className="AlbumShowPage-titles">
                         <div className="AlbumShowPage-title-container">
                             <h1
