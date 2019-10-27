@@ -55,7 +55,7 @@ function MoveModal({
                             className="MoveModal-dropdown"
                             isSearchable={true}
                             name="target_id"
-                            options={moveList.map(artist => {
+                            options={moveList.map && moveList.map(artist => {
                                 return {
                                     value: artist.id,
                                     label: artist.title

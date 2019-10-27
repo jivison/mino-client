@@ -56,7 +56,7 @@ function ArtistShowPage({ match, history }) {
                     {useCORS ? (
                         <img
                             id="artist-image"
-                            className="Image-square Image"
+                            className="Image-square Image-circle Image"
                             style={{ width: "10vw", height: "10vw" }}
                             src={artist.image_url}
                             crossOrigin="anonymous"
