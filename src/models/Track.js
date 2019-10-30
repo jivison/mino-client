@@ -1,31 +1,32 @@
-import query from "../api/query"
+import query from "../api/query";
+
+const endpoint = "tracks";
 
 const Track = {
-    endpoint: "tracks",
+    endpoint: endpoint,
 
     all() {
-        return query("tracks")
+        return query(endpoint);
     },
 
     create(params) {
-        return query("tracks", "post", params)
+        return query(endpoint, "post", params);
     },
 
     update(id, params) {
-        return query(`tracks/${id}`, "patch", params)
+        return query(`${endpoint}/${id}`, "patch", params);
     },
 
     moveable(id) {
-        return query(`tracks/${id}/moveable`)
+        return query(`${endpoint}/${id}/moveable`);
     },
 
     move(id, params) {
-        return query(`tracks/${id}/move`, "post", params)
+        return query(`${endpoint}/${id}/move`, "post", params);
     },
-
     destroy(id) {
-        return query(`tracks/${id}`, "delete")
+        return query(`${endpoint}/${id}`, "delete");
     }
-}
+};
 
-export default Track
+export default Track;
