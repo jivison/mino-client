@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Page from "./Page";
-import MinoRequest from "../api/MinoRequest";
+
+// Models
 import Artist from "../models/Artist";
 import Album from "../models/Album";
+import Track from "../models/Track";
+import Background from "../models/Background";
+import MinoRequest from "../api/MinoRequest";
+
+// External APIs
+import spotifyClientId from "../api/spotify.private";
+
 import CardList from "../components/helpers/CardList";
 import Card from "../components/helpers/Card";
-import Track from "../models/Track";
 import FormatDisplay from "../components/helpers/FormatDisplay";
 import NodeMenu from "../components/helpers/NodeMenu";
 import RequestLink from "../components/helpers/RequestLink";
-import Background from "../models/Background";
-import spotifyClientId from "../api/spotify.private";
 import FormatFilter from "../components/FormatFilter";
 import "../styles/pages/IndexPage.sass";
 
@@ -21,9 +26,12 @@ const endpointToModel = endpoint => {
 function IndexPage({ history }) {
     const [originalEntities, setOriginalEntities] = useState([]);
     const [entities, setEntities] = useState(originalEntities);
+
     const [model, setModel] = useState("artists");
     const [loading, setLoading] = useState(false);
+    
     const [loadingMessage, setLoadingMessage] = useState("Loading...");
+
     const [fakekey, setFakekey] = useState(Math.random());
     const [sessionFakekey, setSessionFakekey] = useState(Math.random());
 
@@ -63,7 +71,7 @@ function IndexPage({ history }) {
                 modelAction={Background.get_session}
                 modelProps={["focus"]}
                 fakekey={sessionFakekey}
-                part="message"
+                part="messages"
                 noLoading
             >
                 <MinoRequest

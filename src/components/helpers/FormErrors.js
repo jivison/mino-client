@@ -3,7 +3,7 @@ import React from "react";
 function FormErrors({ errors = [] }) {
     return <div className="FormErrors">
         {errors.map((error) => {
-            return <p className="error">{error}</p>
+            return <p key={Math.random()} className="error">{error}</p>
         })}
     </div>;
 }

@@ -8,7 +8,8 @@ function CardList({
     letterSeps = false,
     initialLetters = [],
     useIdAsLetter = false,
-    cards=[],
+    cards = [],
+    emptyMessage = "None yet!",
     children
 }) {
     const [letters, setLetters] = useState(initialLetters);
@@ -25,7 +26,7 @@ function CardList({
             newLetters.sort();
             setLetters(newLetters);
         } else {
-            setLetters(initialLetters)
+            setLetters(initialLetters);
         }
         return () => {};
     }, [cards]);
@@ -36,6 +37,7 @@ function CardList({
                 {letterBar && <LetterBar letters={letters} />}
                 <div className={letterBar ? "CardList-content" : ""}>
                     {children}
+                    <p className="empty-text">{cards.length < 1 && emptyMessage}</p>
                     {!letterSeps
                         ? cards
                         : cards.map(card => {

@@ -76,6 +76,7 @@ function AdditionShowPage({ match, history }) {
                     letterBar
                     letterSeps
                     useIdAsLetter
+                    emptyMessage="No tracks left in this addition!"
                     cards={
                         addition.tracks &&
                         addition.tracks

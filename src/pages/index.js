@@ -12,6 +12,8 @@ import SeedPage from "./SeedPage";
 import AdditionsPage from "./AdditionsPage";
 import AdditionShowPage from "./AdditionShowPage";
 import InsightsPage from "./InsightsPage";
+import SigninPage from "./SigninPage";
+import SignupPage from "./SignupPage";
 
 export {
     WelcomePage,
@@ -27,5 +29,7 @@ export {
     SeedPage,
     AdditionsPage,
     AdditionShowPage,
-    InsightsPage
+    InsightsPage,
+    SigninPage,
+    SignupPage
 };

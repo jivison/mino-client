@@ -1,7 +1,7 @@
 import React from "react";
 import CardList from "./helpers/CardList";
 import Card from "./helpers/Card";
-import "../styles/LostAndFound.sass"
+import "../styles/LostAndFound.sass";
 
 function LostAndFound({ lost, found }) {
     return (
@@ -9,6 +9,7 @@ function LostAndFound({ lost, found }) {
             <CardList
                 letterSeps
                 useIdAsLetter
+                emptyMessage="None"
                 cards={lost.map(track => {
                     return (
                         <Card
@@ -28,6 +29,7 @@ function LostAndFound({ lost, found }) {
             <CardList
                 letterSeps
                 useIdAsLetter
+                emptyMessage="None"
                 cards={found.map(track => {
                     return (
                         <Card

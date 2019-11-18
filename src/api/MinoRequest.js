@@ -16,6 +16,7 @@ function MinoRequest({
     useEffect(() => {
         !noReload && setLoading(true);
         modelAction(...modelProps).then(data => {
+            console.log(data);
             if (part) {
                 setFunction(data[part]);
             } else {

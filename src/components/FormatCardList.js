@@ -42,6 +42,7 @@ function FormatCardList({ formats, trackId, setFakekey }) {
     return (
         <div className="FormatCardList">
             <CardList
+                emptyMessage=""
                 cards={formatsState.map(format => {
                     return (
                         <Card

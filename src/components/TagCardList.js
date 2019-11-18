@@ -23,6 +23,7 @@ function TagCardList({ tags, trackId, setFakekey }) {
     return (
         <div className="TagCardList">
             <CardList
+                emptyMessage=""
                 cards={tagsState.map(tag => {
                     return (
                         <Card
