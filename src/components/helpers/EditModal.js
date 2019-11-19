@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Modal from "react-modal";
 import Form from "./Form";
 import FormField from "./FormField";
@@ -7,7 +6,6 @@ import FormField from "./FormField";
 Modal.setAppElement("#root");
 
 function EditModal({
-    children,
     isOpen,
     closeModal,
     entityName = "",
@@ -29,21 +27,29 @@ function EditModal({
             >
                 {fields.map(field => {
                     return (
-                        <FormField
-                            title={
-                                field.charAt(0).toUpperCase() +
-                                field
-                                    .split("")
-                                    .slice(1)
-                                    .join("").split("_").join(" ")
-                            }
-                            name={field}
-                            defaultValue={entity[field]}
-                            type={field.includes("_url") ? "url" : "text"}
-                        />
+                        <React.Fragment key={Math.random()}>
+                            <FormField
+                                title={
+                                    field.charAt(0).toUpperCase() +
+                                    field
+                                        .split("")
+                                        .slice(1)
+                                        .join("")
+                                        .split("_")
+                                        .join(" ")
+                                }
+                                name={field}
+                                defaultValue={entity[field]}
+                                type={field.includes("_url") ? "url" : "text"}
+                            />
+                        </React.Fragment>
                     );
                 })}
-                <FormField name="create_map" type="hidden" defaultValue={true} />
+                <FormField
+                    name="create_map"
+                    type="hidden"
+                    defaultValue={true}
+                />
                 <FormField submit title={`Update ${entityName}`} />
             </Form>
         </Modal>

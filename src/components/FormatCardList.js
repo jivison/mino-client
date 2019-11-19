@@ -45,28 +45,31 @@ function FormatCardList({ formats, trackId, setFakekey }) {
                 emptyMessage=""
                 cards={formatsState.map(format => {
                     return (
-                        <Card
-                            className="FormatCard"
-                            nohover
-                            id={format}
-                            title={
-                                <>
-                                    <span className="FormatCard-title">
-                                        {humanize(format)}{" "}
-                                        <span className="FormatCard-icon">
-                                            {icons[format] || icons["unknown"]}
+                        <React.Fragment key={Math.random()}>
+                            <Card
+                                className="FormatCard"
+                                nohover
+                                id={format}
+                                title={
+                                    <>
+                                        <span className="FormatCard-title">
+                                            {humanize(format)}{" "}
+                                            <span className="FormatCard-icon">
+                                                {icons[format] ||
+                                                    icons["unknown"]}
+                                            </span>
                                         </span>
-                                    </span>
-                                    <span
-                                        className="FormatCard-remove"
-                                        onClick={removeFormat}
-                                        value={format}
-                                    >
-                                        <i className="fas fa-times"></i>
-                                    </span>
-                                </>
-                            }
-                        ></Card>
+                                        <span
+                                            className="FormatCard-remove"
+                                            onClick={removeFormat}
+                                            value={format}
+                                        >
+                                            <i className="fas fa-times"></i>
+                                        </span>
+                                    </>
+                                }
+                            />
+                        </React.Fragment>
                     );
                 })}
             >

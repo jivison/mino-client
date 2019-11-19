@@ -89,7 +89,7 @@ function IndexPage({ history }) {
                                 <Card
                                     small={model === "tracks"}
                                     id={entity.sort_title}
-                                    key={entity.id}
+                                    fakekey={entity.id}
                                     image={
                                         entity.image_url ||
                                         entity.album.image_url

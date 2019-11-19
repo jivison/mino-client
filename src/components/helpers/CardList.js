@@ -37,31 +37,34 @@ function CardList({
                 {letterBar && <LetterBar letters={letters} />}
                 <div className={letterBar ? "CardList-content" : ""}>
                     {children}
-                    <p className="empty-text">{cards.length < 1 && emptyMessage}</p>
+                    <p className="empty-text">
+                        {cards.length < 1 && emptyMessage}
+                    </p>
                     {!letterSeps
                         ? cards
                         : cards.map(card => {
                               if (currentLetter !== card.props.id.charAt(0)) {
                                   currentLetter = card.props.id.charAt(0);
                                   return (
-                                      <>
+                                      <React.Fragment key={Math.random()}>
                                           <div
+                                            key={Math.random()}
                                               id={card.props.id
                                                   .charAt(0)
                                                   .toUpperCase()}
                                               className="letter-sep"
                                           >
-                                              <h1 className="letter-sep-title">
+                                              <h1 className="letter-sep-title" key={card.props.id}>
                                                   {card.props.id
                                                       .charAt(0)
                                                       .toUpperCase()}
                                               </h1>
                                           </div>
                                           {card}
-                                      </>
+                                      </React.Fragment>
                                   );
                               } else {
-                                  return card;
+                                  return <div key={Math.random()}>card</div>;
                               }
                           })}
                 </div>

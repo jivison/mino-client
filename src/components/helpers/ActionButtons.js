@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import EditModal from "./EditModal";
 import MergeModal from "./MergeModal";
-import Artist from "../../models/Artist";
 import MoveModal from "./MoveModal";
 
 function ActionButtons({

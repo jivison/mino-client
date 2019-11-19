@@ -30,7 +30,7 @@ function FormatFilter({ entities, setFunction }) {
             <option value="nofilter">Filter...</option>
             {formats.map(format => {
                 return (
-                    <option value={format}>
+                    <option value={format} key={format}>
                         {format.charAt(0).toUpperCase() +
                             format
                                 .split("")

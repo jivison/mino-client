@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import Modal from "react-modal";
 import MinoRequest from "../../api/MinoRequest";
 import Select from "react-select";
@@ -70,7 +69,5 @@ function MergeModal({
         </MinoRequest>
     );
 }
-
-MergeModal.propTypes = {};
 
 export default MergeModal;

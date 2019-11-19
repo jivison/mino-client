@@ -17,7 +17,8 @@ import {
     AdditionShowPage,
     InsightsPage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    NotFoundPage
 } from "./pages";
 import Navbar from "./pages/Navbar";
 import Favicon from "react-favicon";
@@ -197,6 +198,7 @@ function App() {
                             />
                         )}
                     />
+                    <Route path="/" component={NotFoundPage} />
                 </Switch>
             </Router>
         </div>

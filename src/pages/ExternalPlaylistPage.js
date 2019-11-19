@@ -13,7 +13,6 @@ function ExternalPlaylistPage() {
     );
 
     const accessToken = urlParams.get("access_token");
-    const [errors, setErrors] = useState([urlParams.get("error")]);
     const [messages, setMessages] = useState();
 
     return (
@@ -56,6 +55,7 @@ function ExternalPlaylistPage() {
                                                         .external_urls.spotify
                                                 }
                                                 target="_blank"
+                                                rel="noopener noreferrer"
                                             >
                                                 {"View it on Spotify ↗"}
                                             </a>

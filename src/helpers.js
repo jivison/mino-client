@@ -18,8 +18,6 @@ function humanize(string) {
 }
 
 function corsSafeRequest(method, url, successCallback, errorCallback) {
-    console.log("Checking CORS from ", url);
-
     var createCORSRequest = function(method, url) {
         var xhr = new XMLHttpRequest();
         // No ie8 and ie9 support

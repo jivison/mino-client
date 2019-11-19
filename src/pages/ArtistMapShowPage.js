@@ -9,6 +9,7 @@ import Card from "../components/helpers/Card";
 import Modal from "react-modal";
 import Form from "../components/helpers/Form";
 import FormField from "../components/helpers/FormField";
+import RecordNotFound from "./ErrorPages/RecordNotFound";
 
 function ArtistMapShowPage({ history, match }) {
     const [artistMaps, setArtistMaps] = useState([]);
@@ -51,100 +52,118 @@ function ArtistMapShowPage({ history, match }) {
                     setFunction={setArtist}
                     noLoading={true}
                 >
-                    <Image src={artist.image_url} width="10vw" height="10vw" circle square />
-                    <h1 className="Artist-title">
-                        <span
-                            onClick={() => {
-                                history.push(
-                                    `/collection/artists/${artist.id}`
-                                );
-                            }}
-                            className="as-link"
-                        >
-                            {artist.title}
-                        </span>
-                        <span>&nbsp;Maps</span>
-                        <button
-                            className="ArtistMap-add button"
-                            onClick={openModal}
-                        >
-                            Add Map
-                        </button>
-                    </h1>
-                    <ul className="ArtistMap-list">
-                        {artistMaps
-                            .filter(artistMap => {
-                                return artistMap.input !== artist.title;
-                            })
-                            .map(artistMap => {
-                                return (
-                                    <li>
-                                        ⮤ {artistMap.input}{" "}
-                                        <span
-                                            className="ArtistMap-remove"
-                                            onClick={deleteMap}
-                                            id={artistMap.id}
-                                        >
-                                            <i className="fas fa-times"></i>
-                                        </span>
-                                    </li>
-                                );
-                            })}
-                    </ul>
-                    <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
-                        <button className="generic button" onClick={closeModal}>
-                            Close
-                        </button>
-                        <Form
-                            title={`Add Map to ${artist.title}`}
-                            errors={errors}
-                            fields={["input"]}
-                            submitHandler={data => {
-                                ArtistMap.create(
-                                    Object.assign(data, {
-                                        artist_id: artist.id
-                                    })
-                                ).then(response => {
-                                    if (response.errors) {
-                                        setErrors(response.errors);
-                                    } else {
-                                        setErrors([]);
-                                        closeModal();
-                                        setCurrentValue("");
-                                        setArtistMaps([
-                                            ...artistMaps,
-                                            response
-                                        ]);
-                                    }
-                                });
-                            }}
-                        >
-                            <FormField
-                                title="Input"
-                                name="input"
-                                inputHandler={event => {
-                                    setCurrentValue(
-                                        event.currentTarget.querySelector(
-                                            "input"
-                                        ).value
-                                    );
-                                }}
+                    {artist.id ? (
+                        <>
+                            <Image
+                                src={artist.image_url}
+                                width="10vw"
+                                height="10vw"
+                                circle
+                                square
                             />
-                            <div className="FormField">
-                                <label>Maps to</label>
-                                <Card
-                                    title={artist.title}
-                                    image={artist.image_url}
-                                    nohover
-                                    border
+                            <h1 className="Artist-title">
+                                <span
+                                    onClick={() => {
+                                        history.push(
+                                            `/collection/artists/${artist.id}`
+                                        );
+                                    }}
+                                    className="as-link"
                                 >
-                                    {"⮤ "}
-                                    {currentValue}
-                                </Card>
-                            </div>
-                            <FormField submit title="Add Map!" />
-                        </Form>
-                    </Modal>
+                                    {artist.title}
+                                </span>
+                                <span>&nbsp;Maps</span>
+                                <button
+                                    className="ArtistMap-add button"
+                                    onClick={openModal}
+                                >
+                                    Add Map
+                                </button>
+                            </h1>
+                            <ul className="ArtistMap-list">
+                                {artistMaps
+                                    .filter(artistMap => {
+                                        return artistMap.input !== artist.title;
+                                    })
+                                    .map(artistMap => {
+                                        return (
+                                            <li>
+                                                ⮤ {artistMap.input}{" "}
+                                                <span
+                                                    className="ArtistMap-remove"
+                                                    onClick={deleteMap}
+                                                    id={artistMap.id}
+                                                >
+                                                    <i className="fas fa-times"></i>
+                                                </span>
+                                            </li>
+                                        );
+                                    })}
+                            </ul>
+                            <Modal
+                                isOpen={isModalOpen}
+                                onRequestClose={closeModal}
+                            >
+                                <button
+                                    className="generic button"
+                                    onClick={closeModal}
+                                >
+                                    Close
+                                </button>
+                                <Form
+                                    title={`Add Map to ${artist.title}`}
+                                    errors={errors}
+                                    fields={["input"]}
+                                    submitHandler={data => {
+                                        ArtistMap.create(
+                                            Object.assign(data, {
+                                                artist_id: artist.id
+                                            })
+                                        ).then(response => {
+                                            if (response.errors) {
+                                                setErrors(response.errors);
+                                            } else {
+                                                setErrors([]);
+                                                closeModal();
+                                                setCurrentValue("");
+                                                setArtistMaps([
+                                                    ...artistMaps,
+                                                    response
+                                                ]);
+                                            }
+                                        });
+                                    }}
+                                >
+                                    <FormField
+                                        title="Input"
+                                        name="input"
+                                        inputHandler={event => {
+                                            setCurrentValue(
+                                                event.currentTarget.querySelector(
+                                                    "input"
+                                                ).value
+                                            );
+                                        }}
+                                    />
+                                    <div className="FormField">
+                                        <label>Maps to</label>
+                                        <Card
+                                            title={artist.title}
+                                            image={artist.image_url}
+                                            nohover
+                                            border
+                                        >
+                                            {"⮤ "}
+                                            {currentValue}
+                                        </Card>
+                                    </div>
+                                    <FormField submit title="Add Map!" />
+                                </Form>
+                            </Modal>
+                        </>
+                    ) : (
+                        <RecordNotFound recordName="artist" id={artistId} />
+                    )}
                 </MinoRequest>
             </MinoRequest>
         </Page>

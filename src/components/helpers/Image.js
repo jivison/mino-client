@@ -4,6 +4,7 @@ import "../../styles/helpers/Image.sass";
 
 function Image({
     src,
+    alt="image",
     circle = false,
     square = false,
     width,
@@ -19,6 +20,7 @@ function Image({
     
     return (
         <img
+            alt={alt}
             id={id}
             onLoad={onLoad}
             style={styles}

@@ -14,6 +14,7 @@ import AdditionShowPage from "./AdditionShowPage";
 import InsightsPage from "./InsightsPage";
 import SigninPage from "./SigninPage";
 import SignupPage from "./SignupPage";
+import NotFoundPage from "./ErrorPages/NotFoundPage";
 
 export {
     WelcomePage,
@@ -31,5 +32,6 @@ export {
     AdditionShowPage,
     InsightsPage,
     SigninPage,
-    SignupPage
+    SignupPage,
+    NotFoundPage
 };

@@ -9,6 +9,7 @@ import Modal from "react-modal";
 import Form from "../components/helpers/Form";
 import FormField from "../components/helpers/FormField";
 import Card from "../components/helpers/Card";
+import RecordNotFound from "./ErrorPages/RecordNotFound";
 
 function AlbumMapShowPage({ match, history }) {
     const [albumMaps, setAlbumMaps] = useState([]);
@@ -38,9 +39,6 @@ function AlbumMapShowPage({ match, history }) {
 
     const albumId = match.params.id;
 
-    console.log();
-    console.log(album.title, albumMaps[0] && albumMaps[0].input);
-
     return (
         <Page title="Album Map">
             <MinoRequest
@@ -54,97 +52,120 @@ function AlbumMapShowPage({ match, history }) {
                     setFunction={setAlbum}
                     noLoading={true}
                 >
-                    <Image src={album.image_url} width="10vw" height="10vw" circle square />
-                    <h1 className="Album-title">
-                        <span
-                            className="as-link"
-                            onClick={() => {
-                                history.push(`/collection/albums/${albumId}`);
-                            }}
-                        >
-                            {album.title}
-                        </span>
-                        <span>&nbsp;Maps</span>
-                        <button
-                            className="AlbumMap-add button"
-                            onClick={openModal}
-                        >
-                            Add Map
-                        </button>
-                    </h1>
-                    <ul className="AlbumMap-list">
-                        {albumMaps
-                            .filter(albumMap => {
-                                return albumMap.input !== album.title;
-                            })
-                            .map(albumMap => {
-                                return (
-                                    <li>
-                                        ⮤ {albumMap.input}{" "}
-                                        <span
-                                            className="AlbumMap-remove"
-                                            onClick={deleteMap}
-                                            id={albumMap.id}
-                                        >
-                                            <i className="fas fa-times"></i>
-                                        </span>
-                                    </li>
-                                );
-                            })}
-                    </ul>
-                    <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
-                        <button className="generic button" onClick={closeModal}>
-                            Close
-                        </button>
-                        <Form
-                            title={`Add Map to ${album.title}`}
-                            errors={errors}
-                            fields={["input"]}
-                            submitHandler={data => {
-                                AlbumMap.create(
-                                    Object.assign(data, {
-                                        album_id: album.id,
-                                        scope: album.artist_id
-                                    })
-                                ).then(response => {
-                                    if (response.errors) {
-                                        setErrors(response.errors);
-                                    } else {
-                                        setErrors([]);
-                                        closeModal();
-                                        setCurrentValue("");
-                                        setAlbumMaps([...albumMaps, response]);
-                                    }
-                                });
-                            }}
-                        >
-                            <FormField
-                                title="Input"
-                                name="input"
-                                inputHandler={event => {
-                                    setCurrentValue(
-                                        event.currentTarget.querySelector(
-                                            "input"
-                                        ).value
-                                    );
-                                }}
+                    {album.id ? (
+                        <>
+                            <Image
+                                src={album.image_url}
+                                width="10vw"
+                                height="10vw"
+                                circle
+                                square
                             />
-                            <div className="FormField">
-                                <label>Maps to</label>
-                                <Card
-                                    title={album.title}
-                                    image={album.image_url}
-                                    nohover
-                                    border
-                                    circularImage={false}
+                            <h1 className="Album-title">
+                                <span
+                                    className="as-link"
+                                    onClick={() => {
+                                        history.push(
+                                            `/collection/albums/${albumId}`
+                                        );
+                                    }}
                                 >
-                                    {"⮤ "}
-                                    {currentValue}
-                                </Card>
-                            </div>
-                            <FormField submit title="Add Map!" />
-                        </Form>
-                    </Modal>
+                                    {album.title}
+                                </span>
+                                <span>&nbsp;Maps</span>
+                                <button
+                                    className="AlbumMap-add button"
+                                    onClick={openModal}
+                                >
+                                    Add Map
+                                </button>
+                            </h1>
+                            <ul className="AlbumMap-list">
+                                {albumMaps
+                                    .filter(albumMap => {
+                                        return albumMap.input !== album.title;
+                                    })
+                                    .map(albumMap => {
+                                        return (
+                                            <li>
+                                                ⮤ {albumMap.input}{" "}
+                                                <span
+                                                    className="AlbumMap-remove"
+                                                    onClick={deleteMap}
+                                                    id={albumMap.id}
+                                                >
+                                                    <i className="fas fa-times"></i>
+                                                </span>
+                                            </li>
+                                        );
+                                    })}
+                            </ul>
+                            <Modal
+                                isOpen={isModalOpen}
+                                onRequestClose={closeModal}
+                            >
+                                <button
+                                    className="generic button"
+                                    onClick={closeModal}
+                                >
+                                    Close
+                                </button>
+                                <Form
+                                    title={`Add Map to ${album.title}`}
+                                    errors={errors}
+                                    fields={["input"]}
+                                    submitHandler={data => {
+                                        AlbumMap.create(
+                                            Object.assign(data, {
+                                                album_id: album.id,
+                                                scope: album.artist_id
+                                            })
+                                        ).then(response => {
+                                            if (response.errors) {
+                                                setErrors(response.errors);
+                                            } else {
+                                                setErrors([]);
+                                                closeModal();
+                                                setCurrentValue("");
+                                                setAlbumMaps([
+                                                    ...albumMaps,
+                                                    response
+                                                ]);
+                                            }
+                                        });
+                                    }}
+                                >
+                                    <FormField
+                                        title="Input"
+                                        name="input"
+                                        inputHandler={event => {
+                                            setCurrentValue(
+                                                event.currentTarget.querySelector(
+                                                    "input"
+                                                ).value
+                                            );
+                                        }}
+                                    />
+                                    <div className="FormField">
+                                        <label>Maps to</label>
+                                        <Card
+                                            title={album.title}
+                                            image={album.image_url}
+                                            nohover
+                                            border
+                                            circularImage={false}
+                                        >
+                                            {"⮤ "}
+                                            {currentValue}
+                                        </Card>
+                                    </div>
+                                    <FormField submit title="Add Map!" />
+                                </Form>
+                            </Modal>
+                        </>
+                    ) : (
+                        <RecordNotFound recordName="album" id={albumId} />
+                    )}
                 </MinoRequest>
             </MinoRequest>
         </Page>

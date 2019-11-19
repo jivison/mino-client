@@ -234,7 +234,7 @@ function InsightsPage() {
                                             })
                                             .map(function(format_key) {
                                                 return (
-                                                    <>
+                                                    <React.Fragment key={Math.random()}>
                                                         {format_key
                                                             .split(" ")
                                                             .map(word => {
@@ -271,7 +271,7 @@ function InsightsPage() {
                                                             %
                                                         </span>
                                                         <br />
-                                                    </>
+                                                    </React.Fragment>
                                                 );
                                             })}
                                     </p>
@@ -281,7 +281,7 @@ function InsightsPage() {
 
                         {/* Tags */}
                         <TabPanel>
-                            <div class="InsightsPage-cards">
+                            <div className="InsightsPage-cards">
                                 <InsightCard
                                     title="Tag Wordcloud"
                                     widthOverride="47%"

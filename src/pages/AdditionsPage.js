@@ -4,9 +4,9 @@ import MinoRequest from "../api/MinoRequest";
 import Addition from "../models/Addition";
 import CardList from "../components/helpers/CardList";
 import Card from "../components/helpers/Card";
-import "../styles/pages/AdditionsPage.sass"
+import "../styles/pages/AdditionsPage.sass";
 
-function AdditionsPage({history}) {
+function AdditionsPage({ history }) {
     const [originalAdditions, setOriginalAdditions] = useState([]);
     const [additions, setAdditions] = useState([]);
     const [showUnassociated, setShowUnassociated] = useState(false);
@@ -31,20 +31,24 @@ function AdditionsPage({history}) {
                 <CardList
                     cards={additions.map(addition => {
                         return (
-                            <Card
-                                title={
-                                    <span className="AdditionCard-titles">
-                                        {addition.humanized_type}{" "}
-                                        <span className="subtitle">
-                                            {addition.id_string}
+                            <React.Fragment key={Math.random()}>
+                                <Card
+                                    title={
+                                        <span className="AdditionCard-titles">
+                                            {addition.humanized_type}{" "}
+                                            <span className="subtitle">
+                                                {addition.id_string}
+                                            </span>
                                         </span>
-                                    </span>
-                                }
-                                subtitle={`added ${addition.humanized_date} ago`}
-                                clickHandler={() => {
-                                    history.push(`/additions/${addition.id}`)
-                                }}
-                            ></Card>
+                                    }
+                                    subtitle={`added ${addition.humanized_date} ago`}
+                                    clickHandler={() => {
+                                        history.push(
+                                            `/additions/${addition.id}`
+                                        );
+                                    }}
+                                />
+                            </React.Fragment>
                         );
                     })}
                 >

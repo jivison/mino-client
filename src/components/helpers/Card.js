@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import "../../styles/helpers/Card.sass";
 import Image from "./Image";
 
@@ -15,12 +14,14 @@ function Card({
     className = "",
     border = false,
     small = false,
+    fakekey = Math.random(),
     useChecked
 }) {
     const [checked, setChecked] = useState(false);
 
     return (
         <div
+            key={fakekey}
             id={id}
             className={
                 (!nohover ? "Card Card-hover" : "Card") +
@@ -60,14 +61,5 @@ function Card({
         </div>
     );
 }
-
-Card.propTypes = {
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    image: PropTypes.string,
-    hover: PropTypes.bool,
-    circularImage: PropTypes.bool,
-    clickHandler: PropTypes.func
-};
 
 export default Card;
