@@ -41,6 +41,7 @@ function MergeModal({
                     submitHandler={data => {
                         targetModel.merge(entity.id, data).then(response => {
                             closeModal();
+                            console.log(response);
                             history.push(
                                 `/collection/${mergeRedirectEndpoint}/${response.id}`
                             );

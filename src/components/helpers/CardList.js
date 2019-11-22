@@ -64,7 +64,7 @@ function CardList({
                                       </React.Fragment>
                                   );
                               } else {
-                                  return <div key={Math.random()}>card</div>;
+                                  return <div key={Math.random()}>{card}</div>;
                               }
                           })}
                 </div>

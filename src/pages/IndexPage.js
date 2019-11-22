@@ -119,7 +119,7 @@ function IndexPage({ history }) {
                                             `/collection/${endpoint}/${entityId}`
                                         );
                                     }}
-                                ></Card>
+                                />
                             );
                         })}
                     >
